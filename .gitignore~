@@ -10,7 +10,6 @@
 
 # misc
 .idea/
-.vscode/
 /.sass-cache
 /connect.lock
 /coverage/*
