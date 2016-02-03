@@ -1,4 +1,5 @@
-# Frost-select-2
+# ember-frost-select
+the drop-down select widget to rule them all
 
 This README outlines the details of collaborating on this Ember addon.
 
