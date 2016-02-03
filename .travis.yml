@@ -1,65 +1,42 @@
-# Pretty straightforward
-# https://docs.travis-ci.com/user/languages/javascript-with-nodejs#Choosing-Node-versions-to-test-against
 language: node_js
 node_js:
 - '5.3'
- 
-# Use containers
-# https://docs.travis-ci.com/user/workers/container-based-infrastructure/#Routing-your-build-to-container-based-infrastructure
 sudo: false
- 
-# Skip tags
-# https://docs.travis-ci.com/user/customizing-the-build/#Building-Specific-Branches
 branches:
   except:
   - /^v[0-9\.]+/
- 
-# Install global dependencies
-# bower isn't needed by node packages, so you can leave it off if you don't need it
-# also, check for a version-bump comment in a PR description (safely becomes noop for non PR builds)
 before_install:
 - npm install -g coveralls pr-bumper bower
 - pr-bumper check
- 
-# Extend the default install step with a bower install (again, you can skip this for a node project)
 install:
 - npm install
-- bower install 
- 
-# Upload coverage info to coveralls.io, but first fix naming issue w.r.t. ember addons
-# Replace my-addon-name with the actual name of your addon (i.e. ember-frost-button)
+- bower install
 after_success:
-- sed -i -- 's/SF:my-addon-name\/\(.*\)/SF:addon\/\1.js/' coverage/lcov.info && rm -f coverage/lcov.info--
+- sed -i -- 's/SF:my-addon-name\/\(.*\)/SF:addon\/\1.js/' coverage/lcov.info && rm
+  -f coverage/lcov.info--
 - cat coverage/lcov.info | coveralls
- 
-# Add support for node >= v4 compilers
-# https://docs.travis-ci.com/user/languages/javascript-with-nodejs#Node.js-v4-(or-io.js-v3)-compiler-requirements
 env:
   matrix:
   - CXX=g++-4.8
+  global:
+    secure: qUIJUJh1Izv6W3JlrqdzVDUOEVzqYPX3WSw1ybvvL7IF4u1mFZXbTImAC+odLt5/6ruSf030lAWe7oyzfQ2vEl0amDxMRRCpC8UxKEzLgY7fEB/+MlaRBf7nUv+Fb6ig/yqnhPvmhhu8DgLXn9zQd+luan2VJjnCH2xf/McaZJy7i6M5H3Mygu4/w+lEHyf6zQbcrB7GJj0DKmQHHSzFdgr43vphc9jTfYcB/5Irek4Wp5GMOlin5XYFoz1VlvcZwwjjvg3f9GJcp75/CMLy2Dxz25p84wQgGC+Ft3X2eKqAyOsp2n2wco6Zoy2vHrUooAIbof9leJ4+nTWAC2EkB4M5wHU+WIDwRThCOKtMPFCPLln0sqhzgLDD8+1shPm/PBY23ykv6UGb5vvTcvfmGmlBCnbyukYpm0bsoGBPbYjCQDGF41zmEmNZwx4vNAzvypqx94B3sDPPYx2wzbDbwIVY8QtCaJdAK7CUF8WjQOZkyhtIoTG1Yuq2BJugWaFqjhAegPou7+O3CEVo0nRHvDsbLqUfoz6Y7VMm7jYlkjny65XkhKy1yeNlaphDW0dxNNW0VSv9WhRfhW1ZJixvNA7aojoP8TI4NfD4EG+FDnZdDvQJMNgSHN79NUTEHryt71fcQQUulzwyoXb/yyZT/wMdXbjrszhjsvwf5SiJrU8=
 addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
- 
-# Perform a version bump before publishing to npm
 before_deploy:
 - pr-bumper bump
- 
-# Publish to npm registry
-# https://docs.travis-ci.com/user/deployment/npm
 deploy:
   provider: npm
   email: npm.ciena@gmail.com
   skip_cleanup: true
   api_key:
+    secure: UpU/p3IEL1e/G2lkrX1YhkuX6KDz5aCYZUf5j9fTS8GpdaZkgpoSWack+51qqew78RoU+TJrjJD0rODtzr83nRNcjwZ9QZpl6zS8on5K4FnpnPun08+eYZZ+Z62z7IHFog+5idr8O6l2iCnM1ov9gJX5D5iWj2OmAyJxIx+k+US6DndpvM+P7dEemQb+tNuotxrpHlR3Gh+P6Lgk5pqKY088W7u34f8CB6I04uayXIzI6sHmhTmvquxS/erPPwpwZMH4IHjA9wZos8Q7dHR1g/JWscrYqJe5dYOSAtyA6iik6XOC3dkcOdHblgyBu6WBDXtlT59YYFbpIMib3QVB3JKD/sYq04f4VEc214cuSZITCOpeB0oB14PdVMn76TGkUBmS0YMsCLhDvL7N1E6RJj+VP5ZEvwIGId1f2lXokQu5XfUlPl7gBJ3UhJxsVzoffL/o8tJ/14s86XWkf36qTVMY0WoqtZeDjpTnXzhT+YMf845dB/nzs5ChySZcmFXK9q5SvoeKvUUhmHbLdYh6+FlK8VpTSAd8M4ksFq8oelNOxNtQh2zLZQAlMymwM67BNj/D49MVICSYMPzl1OQazYdeEO3XyuS9x6y4H40+ijz4cFrm+ATTG20oBq0+0ibMOumodOnUH4h/ZRUzKOLJ21LnirnCnXGBDgykbIh3Y+w=
   on:
     branch: master
     tags: false
- 
-# Configure slack notifications
-# https://docs.travis-ci.com/user/notifications/#Slack-notifications
 notifications:
   slack:
+    secure: EDkHNDdvn0d9fv8Xb0bEZt3v/F3E8pRB3M+no4f6+kEwFE+kT6mAB47j0uw10e3GDAvzYRSqoReeBvp29CbxjmKUjqbUCJAjwIljohgE1HnfQkLe7VqN+HLEosWtXaoooWjVvQkNN6ZW6NeLKQeoE+NiTzW8FlLdGZ+y32Ul3Uxp1X5PRWnPXbsoV9USqI4O4QFF/vl3BRgCwtOvPHD9bY1390iWW1FmiFLwrClBD2111BnXhAVWqnItOVD/G0pCbjC3cZtvRq81ogPlj/j85DXttX62ZAz9ECAc+MLKqOY/3X1dohwfiui2XKCt1/9Y1A1NjVWvRqX13U15etk2m/UcPnptZODb13xcvj4YnXBKN1BmdxOwvpToQDDRK1TkbILF243myGmRWaS65+MHjlxFkAagw/oosif8Vbwhp1EoCy+q9LMSNYIY50MQgCmziRmEXNWENwg64ZJzgvr9qRg3Ki5RynHuRchmRwtoBJoESWAqnTYKDYsQTXBDTTaJYkKEfND8aao5HqeKrFo6t5GsMBkr63Y6fjuU/vyVmcldUeh2vF5JBwluzzhBzRfsJRS784TL4kgb/pIzsWD51EHINkCHbS2GLCKE02y66UP97EtwmapzshMHDEfWjZCQtS84XTiFJEQupHkCKyu3QMW6xF3iiw+BdduKK03LxIo=
