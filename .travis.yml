@@ -1,0 +1,65 @@
+# Pretty straightforward
+# https://docs.travis-ci.com/user/languages/javascript-with-nodejs#Choosing-Node-versions-to-test-against
+language: node_js
+node_js:
+- '5.3'
+ 
+# Use containers
+# https://docs.travis-ci.com/user/workers/container-based-infrastructure/#Routing-your-build-to-container-based-infrastructure
+sudo: false
+ 
+# Skip tags
+# https://docs.travis-ci.com/user/customizing-the-build/#Building-Specific-Branches
+branches:
+  except:
+  - /^v[0-9\.]+/
+ 
+# Install global dependencies
+# bower isn't needed by node packages, so you can leave it off if you don't need it
+# also, check for a version-bump comment in a PR description (safely becomes noop for non PR builds)
+before_install:
+- npm install -g coveralls pr-bumper bower
+- pr-bumper check
+ 
+# Extend the default install step with a bower install (again, you can skip this for a node project)
+install:
+- npm install
+- bower install 
+ 
+# Upload coverage info to coveralls.io, but first fix naming issue w.r.t. ember addons
+# Replace my-addon-name with the actual name of your addon (i.e. ember-frost-button)
+after_success:
+- sed -i -- 's/SF:my-addon-name\/\(.*\)/SF:addon\/\1.js/' coverage/lcov.info && rm -f coverage/lcov.info--
+- cat coverage/lcov.info | coveralls
+ 
+# Add support for node >= v4 compilers
+# https://docs.travis-ci.com/user/languages/javascript-with-nodejs#Node.js-v4-(or-io.js-v3)-compiler-requirements
+env:
+  matrix:
+  - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
+ 
+# Perform a version bump before publishing to npm
+before_deploy:
+- pr-bumper bump
+ 
+# Publish to npm registry
+# https://docs.travis-ci.com/user/deployment/npm
+deploy:
+  provider: npm
+  email: npm.ciena@gmail.com
+  skip_cleanup: true
+  api_key:
+  on:
+    branch: master
+    tags: false
+ 
+# Configure slack notifications
+# https://docs.travis-ci.com/user/notifications/#Slack-notifications
+notifications:
+  slack:
