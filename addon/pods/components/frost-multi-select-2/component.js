@@ -1,7 +1,5 @@
-import FrostSelect from '../frost-select-2/component';
+import FrostSelect from '../frost-select-2/component'
 
-let FrostMultiSelect = FrostSelect.extend ({
-  
-});
+let FrostMultiSelect = FrostSelect.extend({})
 
-export default FrostMultiSelect;
+export default FrostMultiSelect

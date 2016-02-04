@@ -7,9 +7,10 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "ember build",
+    "lint": "eslint .",
     "start": "ember server",
-    "test": "ember try:testall"
+    "build": "ember build",
+    "test": "npm run-script lint && ember test"
   },
   "repository": "https://stash.ciena.com/scm/nms_frost/frost-select-2.git",
   "engines": {
@@ -42,12 +43,13 @@
     "ember-suave": "1.2.3",
     "ember-truth-helpers": "^1.2.0",
     "ember-try": "~0.0.8",
+    "eslint": "^1.10.3",
+    "eslint-config-frost-standard": "^0.2.4",
     "frost-checkbox": "1.1.5",
     "frost-cli": "1.0.9",
     "frost-docs": "~1.1.0",
     "frost-svg": "~1.1.0",
-    "frost-tabs": "~2.1.0",
-    "jscs": "^2.7.0"
+    "frost-tabs": "~2.1.0"
   },
   "keywords": [
     "ember-addon"
