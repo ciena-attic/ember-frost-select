@@ -1,51 +1,51 @@
-import Ember from 'ember';
+import Ember from 'ember'
 
 export default Ember.Controller.extend({
   data: [
     {
-      "value": "Lex Diamond",
-      "label": "Raekwon the Chef"
+      'value': 'Lex Diamond',
+      'label': 'Raekwon the Chef'
     },
     {
-      "value": "Johnny Blaze",
-      "label": "Method Man"
+      'value': 'Johnny Blaze',
+      'label': 'Method Man'
     },
     {
-      "value": "Tony Starks",
-      "label": "Ghostface"
+      'value': 'Tony Starks',
+      'label': 'Ghostface'
     },
     {
-      "value": "Bobby Steels",
-      "label": "The RZA"
+      'value': 'Bobby Steels',
+      'label': 'The RZA'
     },
     {
-      "value": "Noodles",
-      "label": "Masta Killa"
+      'value': 'Noodles',
+      'label': 'Masta Killa'
     },
     {
-      "value": "Golden Arms",
-      "label": "U-God"
+      'value': 'Golden Arms',
+      'label': 'U-God'
     },
     {
-      "value": "Maximillion",
-      "label": "GZA"
+      'value': 'Maximillion',
+      'label': 'GZA'
     },
     {
-      "value": "Rollie Fingers",
-      "label": "Inspectah Deck"
+      'value': 'Rollie Fingers',
+      'label': 'Inspectah Deck'
     },
     {
-      "value": "Cappachino",
-      "label": "Cappadonna"
+      'value': 'Cappachino',
+      'label': 'Cappadonna'
     },
     {
-      "value": "Osirus",
-      "label": "Ol' Dirty Bastard"
+      'value': 'Osirus',
+      'label': "Ol' Dirty Bastard"
     }
   ],
   actions: {
-    onChange(values) {
-      console.log(values);
+    onChange (values) {
+      console.log(values)
     }
   }
-});
+})

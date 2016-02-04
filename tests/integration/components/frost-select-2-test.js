@@ -1,7 +1,7 @@
 /* jshint expr:true */
-import { expect } from 'chai';
-import { describeComponent, it } from 'ember-mocha';
-import hbs from 'htmlbars-inline-precompile';
+import { expect } from 'chai'
+import { describeComponent, it } from 'ember-mocha'
+// import hbs from 'htmlbars-inline-precompile'
 
 describeComponent(
   'frost-select-2',
@@ -9,8 +9,8 @@ describeComponent(
   {
     integration: true
   },
-  function() {
-    it('renders', function() {
+  function () {
+    it('renders', function () {
       // Set any properties with this.set('myProperty', 'value');
       // Handle any actions with this.on('myAction', function(val) { ... });
       // Template block usage:
@@ -19,8 +19,8 @@ describeComponent(
       //     template content
       //   {{/frost-select-2}}
       // `);
-      expect(this.$()).to.have.length(1);
-    });
+      expect(this.$()).to.have.length(1)
+    })
   }
-);
+)
 

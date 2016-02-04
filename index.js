@@ -1,12 +1,12 @@
 /* globals module */
 /* jshint node: true */
 
-'use strict';
+'use strict'
 
 module.exports = {
-	name: 'frost-select-2',
+  name: 'frost-select-2',
 
-	included: function(app) {
-		this._super.included(app);
-	}
-};
+  included: function (app) {
+    this._super.included(app)
+  }
+}

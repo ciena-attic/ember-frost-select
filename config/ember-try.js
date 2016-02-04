@@ -1,9 +1,10 @@
-/*jshint node:true*/
+/* jshint node:true */
+
 module.exports = {
   scenarios: [
     {
       name: 'default',
-      dependencies: { }
+      dependencies: {}
     },
     {
       name: 'ember-release',
@@ -33,4 +34,4 @@ module.exports = {
       }
     }
   ]
-};
+}
