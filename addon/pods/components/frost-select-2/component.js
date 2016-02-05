@@ -3,7 +3,7 @@ import layout from './template'
 import _ from 'lodash'
 
 let FrostSelect = Ember.Component.extend({
-  classNames: ['frost-select-2'],
+  classNames: ['frost-select'],
   classNameBindings: ['focus:focus', 'open:open', 'error:error'],
   attributeBindings: ['tabIndex'],
   tabIndex: -1,
@@ -93,7 +93,7 @@ let FrostSelect = Ember.Component.extend({
     }
 
     if (this.get('open')) {
-      this.setProperties({open: false, filter: undefined})
+      this.setProperties({open: false, filter: undefined, hovered: -1})
       return
     }
 
@@ -182,7 +182,6 @@ let FrostSelect = Ember.Component.extend({
       hovered += 1
     }
     this.set('hovered', hovered)
-    console.log(`hovered: ${this.get('hovered')}`)
   },
 
   hoverPrev () {

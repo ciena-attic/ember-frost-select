@@ -17,7 +17,8 @@
     "Faker": "3.0.1",
     "lodash": "3.10.1",
     "perfect-scrollbar": "0.6.7",
-    "pretender": "0.10.1"
+    "pretender": "0.10.1",
+    "sinonjs": "^1.17.1"
   },
   "resolutions": {
     "ember": "2.2.0"
