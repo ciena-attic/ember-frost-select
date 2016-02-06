@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 let FrostSelect = Ember.Component.extend({
   classNames: ['frost-select'],
-  classNameBindings: ['focus:focus', 'open:open', 'error:error'],
+  classNameBindings: ['focus', 'shouldOpen:open', 'error'],
   attributeBindings: ['tabIndex'],
   tabIndex: -1,
   selected: [],
@@ -34,33 +34,42 @@ let FrostSelect = Ember.Component.extend({
     return this.get('displayItems').length === 0
   }),
 
-  shouldOpen: Ember.observer('displayItems', function () {
-    if (this.get('displayItems').length === 0) {
-      this.set('open', false)
-      this.set('disabled', true)
-    } else {
-      this.set('disabled', false)
-    }
+  shouldOpen: Ember.computed('error', 'open', function () {
+    return !this.get('error') && !this.get('shouldDisable') && this.get('open')
+  }),
+
+  shouldDisable: Ember.computed('error', 'disabled', function () {
+    return this.get('error') || this.get('disabled')
   }),
 
   didInsertElement () {
     this.set('inputEl', this.$('input'))
   },
 
+  inputElement () {
+    return this.$('input')
+  },
+
   getLabel (item) {
     return item.label
   },
 
-  getPrompt () {
+  prompt: Ember.computed('selected', function () {
+    let selectedIndex = this.get('selected')
+    let data = this.get('data')
+    let filter = this.get('filter')
     let prompt = ''
-    if (this.get('filter') !== undefined) {
-      prompt = this.get('filter')
+
+    if (filter !== undefined) {
+      prompt = filter
     } else {
-      let selected = this.get('data')[this.get('selected')[0]] || {}
-      prompt = selected.label
+      let selectedItem = data[selectedIndex[0]]
+      if (selectedItem) {
+        prompt = selectedItem.label
+      }
     }
     return prompt
-  },
+  }),
 
   getValues (selected = this.get('selected')) {
     return selected.map((selectedIndex) => {
@@ -69,7 +78,8 @@ let FrostSelect = Ember.Component.extend({
   },
 
   chooseHovered () {
-    this.select(this.get('displayItems')[this.get('hovered')].index)
+    let displayItem = this.get('displayItems')[this.get('hovered')]
+    this.select(displayItem.index)
   },
 
   getValid (filter) {
@@ -88,7 +98,7 @@ let FrostSelect = Ember.Component.extend({
 
   toggle (event) {
     event.preventDefault()
-    if (this.get('disabled')) {
+    if (this.get('shouldDisable')) {
       return
     }
 
@@ -128,9 +138,7 @@ let FrostSelect = Ember.Component.extend({
       selected: selected,
       open: false
     })
-    this.set('filter', this.getPrompt())
-    this.set('prompt', this.getPrompt())
-
+    this.set('filter', undefined)
     if (this.get('on-change') && _.isFunction(this.get('on-change'))) {
       this.get('on-change')(values)
     }
@@ -170,7 +178,11 @@ let FrostSelect = Ember.Component.extend({
         // this.scrollToHovered();
         break
 
-      default:
+      // backspace
+      case 8:
+        if (!this.get('open')) {
+          this.toggle(event)
+        }
     }
   },
 
@@ -215,7 +227,7 @@ let FrostSelect = Ember.Component.extend({
     },
 
     onChange (event) {
-      let target = event.currentTarget
+      let target = event.currentTarget || event.target
       this.search(target.value)
     },
 
@@ -232,7 +244,7 @@ let FrostSelect = Ember.Component.extend({
 
     onSelect (event) {
       event.stopPropagation()
-      let target = event.currentTarget
+      let target = event.currentTarget || event.target
       let index = parseInt(target.getAttribute('data-index'), 10)
       this.select(index)
     }
