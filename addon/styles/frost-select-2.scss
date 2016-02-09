@@ -6,7 +6,7 @@
   width: 0;
 }
 
-.frost-select-2 {
+.frost-select {
 
   border: solid 1px $frost-color-lgrey-2;
   box-sizing: border-box;
@@ -30,7 +30,7 @@
     top: -10px;
     z-index: 3;
   }
-  
+
 
   .drop-down-container {
     background: $frost-color-white;
@@ -97,7 +97,7 @@
   }
 }
 
-.frost-select-2.open {
+.frost-select.open {
   .drop-down-container {
     height: auto;
     opacity: 1;
@@ -105,7 +105,7 @@
   }
 }
 
-.frost-select-2.multi {
+.frost-select.multi {
   li {
     padding: 0 10px;
   }
