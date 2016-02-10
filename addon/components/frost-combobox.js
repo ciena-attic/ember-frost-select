@@ -1,7 +1,9 @@
-import FrostSelect from '../frost-select-2/component'
+import FrostSelect from './frost-select'
+import layout from '../templates/components/frost-combobox';
+import Ember from 'ember';
 
 let FrostComboBox = FrostSelect.extend({
-
+  layout,
   getLabel (item) {
     return item.value
   },

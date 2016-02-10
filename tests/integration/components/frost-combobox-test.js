@@ -10,11 +10,11 @@ function wait (callback) {
   Ember.run.later(callback)
 }
 
-const testTemplate = hbs`{{frost-combobox-2 on-change=onChange data=data greeting=greeting}}`
+const testTemplate = hbs`{{frost-combobox on-change=onChange data=data greeting=greeting}}`
 
 describeComponent(
-  'frost-combobox-2',
-  'Integration: FrostCombobox2Component',
+  'frost-combobox',
+  'Integration: FrostComboboxComponent',
   {
     integration: true
   },

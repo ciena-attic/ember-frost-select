@@ -1,5 +1,5 @@
 import Ember from 'ember'
-import layout from './template'
+import layout from '../templates/components/frost-select';
 import _ from 'lodash'
 
 let FrostSelect = Ember.Component.extend({

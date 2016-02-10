@@ -8,7 +8,7 @@ import $ from 'jquery'
 import _ from 'lodash'
 import Ember from 'ember'
 
-const testTemplate = hbs`{{frost-select-2 on-change=onChange data=data greeting=greeting}}`
+const testTemplate = hbs`{{frost-select on-change=onChange data=data greeting=greeting}}`
 
 const keyCodes = {
   'up': 38,
@@ -27,8 +27,8 @@ function keyUp ($selection, keyCode) {
 }
 
 describeComponent(
-  'frost-select-2',
-  'Integration: FrostSelect2Component',
+  'frost-select',
+  'Integration: FrostSelectComponent',
   {
     integration: true
   },

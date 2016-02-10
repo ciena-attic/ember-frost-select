@@ -1,7 +1,8 @@
-import FrostSelect from '../frost-select-2/component'
-import layout from './template'
+import FrostSelect from './frost-select'
+import layout from '../templates/components/frost-multi-select';
 import Ember from 'ember'
 import _ from 'lodash'
+
 
 let FrostMultiSelect = FrostSelect.extend({
   layout,
@@ -18,7 +19,7 @@ let FrostMultiSelect = FrostSelect.extend({
     } else {
       prompt = `${selected.length} items selected`
     }
-
+    
     return prompt
   }),
 

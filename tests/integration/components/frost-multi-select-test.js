@@ -10,11 +10,11 @@ function wait (callback) {
   Ember.run.later(callback)
 }
 
-const testTemplate = hbs`{{frost-multi-select-2 on-change=onChange data=data greeting=greeting}}`
+const testTemplate = hbs`{{frost-multi-select on-change=onChange data=data greeting=greeting}}`
 
 describeComponent(
-  'frost-multi-select-2',
-  'Integration: FrostMultiSelect2Component',
+  'frost-multi-select',
+  'Integration: FrostMultiSelectComponent',
   {
     integration: true
   },
