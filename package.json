@@ -38,6 +38,8 @@
     "ember-data": "2.2.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
+    "ember-frost-css-core": "0.1.2",
+    "ember-frost-theme": "0.1.6",
     "ember-lodash": "^0.0.6",
     "ember-mocha": "^0.8.11",
     "ember-resolver": "^2.0.3",
@@ -59,7 +61,6 @@
     "ember-cli-babel": "^5.1.5",
     "ember-cli-htmlbars": "^1.0.1",
     "ember-cli-sass": "5.1.0",
-    "frost-css": "~1.1.0",
     "liquid-fire": "0.22.0"
   },
   "ember-addon": {
