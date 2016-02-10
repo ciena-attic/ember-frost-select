@@ -4,8 +4,6 @@ import { describeComponent, it } from 'ember-mocha'
 import { beforeEach } from 'mocha'
 import sinon from 'sinon'
 import hbs from 'htmlbars-inline-precompile'
-import $ from 'jquery'
-import _ from 'lodash'
 import Ember from 'ember'
 
 function wait (callback) {
@@ -14,22 +12,6 @@ function wait (callback) {
 
 const testTemplate = hbs`{{frost-multi-select-2 on-change=onChange data=data greeting=greeting}}`
 
-const keyCodes = {
-  'up': 38,
-  'down': 40,
-  esc: 27
-}
-
-function keyUp ($selection, keyCode) {
-  if (_.isString(keyCode)) {
-    keyCode = keyCodes[keyCode]
-  }
-  let event = $.Event('keyup')
-  event.which = keyCode
-
-  $selection.trigger(event)
-}
-
 describeComponent(
   'frost-multi-select-2',
   'Integration: FrostMultiSelect2Component',
@@ -37,9 +19,7 @@ describeComponent(
     integration: true
   },
   function () {
-    let sandbox
     let props
-    let dropDown
 
     beforeEach(function () {
       // sandbox = sinon.sandbox.create()
@@ -62,37 +42,90 @@ describeComponent(
         greeting: 'Hola'
       }
 
-      this.setProperties(props)
+      Ember.run(() => {
+        this.setProperties(props)
+      })
 
       this.render(testTemplate)
-      dropDown = this.$('.frost-select')
     })
 
     it('renders', function () {
-      expect(this.$('.frost-select')).to.have.length(1)
+      expect(this.$('.frost-select.multi')).to.have.length(1)
     })
 
-    it('allows for multiple values to be selected', function (done) {
-      this.$('li:nth-child(2)').click()
-      this.$('li:nth-child(3)').click()
-      wait(() => {
-        let values = props.onChange.lastCall.args[0]
+    it('shows a checkbox for each item', function () {
+      // test that each row has a checkbox, maybe $('.frost-checkbox').length
+      expect(this.$('.frost-checkbox').length).to.eql(props.data.length)
+    })
 
-        expect(values).to.eql(['Johnny Blaze', 'Tony Starks'])
+    it('clicking a row checks the box', function (done) {
+      this.$('.frost-select li:first-child').click()
+      wait(() => {
+        expect(this.$('.frost-select .selected')).to.have.length(1)
         done()
       })
     })
 
-    it('removes values from the list', function (done) {
-      this.$('li:nth-child(2)').click()
-      this.$('li:nth-child(3)').click()
-
-      // TODO: click remove item
+    it('displays the selection in the text input when 1 item is selected', function (done) {
+      this.$('.frost-select li:first-child').click()
       wait(() => {
-        let values = props.onChange.lastCall.args[0]
+        expect(this.$('.frost-select .trigger').val()).to.eql(props.data[0].label)
+        done()
+      })
+    })
 
-        expect(values).to.eql(['Johnny Blaze'])
+    it('displays both selected items in the text input when 2 items are selected', function (done) {
+      this.$('.frost-select li:first-child').click()
+      this.$('.frost-select li:nth-child(2)').click()
+      wait(() => {
+        expect(this.$('.frost-select .trigger').val()).to.eql([props.data[0].label, props.data[1].label].join(', '))
+        done()
+      })
+    })
 
+    it('displays the number of selected items in the text input when 3 or more items are selected', function (done) {
+      this.$('.frost-select li:first-child').click()
+      this.$('.frost-select li:nth-child(2)').click()
+      this.$('.frost-select li:nth-child(3)').click()
+      wait(() => {
+        expect(this.$('.frost-select .trigger').val()).to.eql('3 items selected')
+        done()
+      })
+    })
+
+    it('has a footer message with number selected', function (done) {
+      this.$('.frost-select li:first-child').click()
+      this.$('.frost-select li:nth-child(2)').click()
+      this.$('.frost-select li:nth-child(3)').click()
+      wait(() => {
+        expect(this.$('.frost-select .number-selected').text()).to.eql('3 selected')
+        done()
+      })
+    })
+
+    it('has a clear button', function () {
+      expect(this.$('.frost-select .clear')).to.have.length(1)
+    })
+
+    it('that clears the selection', function (done) {
+      this.$('.frost-select li:first-child').click()
+      this.$('.frost-select li:nth-child(2)').click()
+      this.$('.frost-select li:nth-child(3)').click()
+      this.$('.frost-select .clear').click()
+      wait(() => {
+        expect(this.$('.frost-select .selected')).to.have.length(0)
+        done()
+      })
+    })
+
+    it('filters list when none are selected', function (done) {
+      wait(() => {
+        done()
+      })
+    })
+
+    it('does not allow filtering when 1+ are selected', function (done) {
+      wait(() => {
         done()
       })
     })

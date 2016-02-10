@@ -7,7 +7,6 @@ let FrostSelect = Ember.Component.extend({
   classNameBindings: ['focus', 'shouldOpen:open', 'error'],
   attributeBindings: ['tabIndex'],
   tabIndex: -1,
-  selected: [],
   hovered: -1,
   disabled: false,
   filter: undefined,
@@ -118,6 +117,7 @@ let FrostSelect = Ember.Component.extend({
       let className = ''
       if (this.get('selected').indexOf(validItem.index) !== -1) {
         className += ' selected'
+        validItem.selected = true
       }
 
       if (index === this.get('hovered') || list.length === 1) {
@@ -248,6 +248,10 @@ let FrostSelect = Ember.Component.extend({
       let index = parseInt(target.getAttribute('data-index'), 10)
       this.select(index)
     }
+  },
+  init () {
+    this._super()
+    this.set('selected', [])
   }
 
 })

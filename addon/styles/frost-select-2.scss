@@ -123,7 +123,7 @@
   }
 }
 
-.frost-select-2.focus {
+.frost-select.focus {
   border: solid 1px $frost-color-blue-1;
 
   .down-arrow {
@@ -134,11 +134,29 @@
   }
 }
 
-.frost-select-2.error {
+.frost-select.error {
   border: solid 1px $frost-color-critical-1;
   .down-arrow {
     polygon {
       fill: $frost-color-grey-5
+    }
+  }
+}
+
+.frost-select.multi {
+  li {
+    padding: 0 10px;
+  }
+
+  .multi-status {
+    border-top: solid 3px transparentize($frost-color-blue-1, .88);
+    padding: 10px;
+
+    a {
+      color: $frost-color-blue-1;
+      float: right;
+      font-weight: bold;
+      text-decoration: none;
     }
   }
 }
