@@ -4,7 +4,7 @@
 'use strict'
 
 module.exports = {
-  name: 'frost-select-2',
+  name: 'frost-select',
 
   included: function (app) {
     this._super.included(app)

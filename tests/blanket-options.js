@@ -1,8 +1,8 @@
 /* globals blanket, module */
 
 var options = {
-  modulePrefix: 'frost-select-2',
-  filter: '//.*frost-select-2/.*/',
+  modulePrefix: 'ember-frost-select',
+  filter: '//.*ember-frost-select/.*/',
   antifilter: '//.*(tests|template).*/',
   loaderExclusions: [],
   enableCoverage: true,
