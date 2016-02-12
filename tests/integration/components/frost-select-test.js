@@ -33,12 +33,10 @@ describeComponent(
     integration: true
   },
   function () {
-    let sandbox
     let props
     let dropDown
 
     beforeEach(function () {
-      // sandbox = sinon.sandbox.create()
       props = {
         onChange: sinon.spy(),
         data: [
@@ -74,10 +72,18 @@ describeComponent(
       })
     })
 
-    it('opens when clicked', (done) => {
-      this.$('.frost-select').click()
+    it('opens when arrow clicked', (done) => {
+      this.$('.frost-select .down-arrow').click()
       Ember.run.later(() => {
         expect(this.$('.frost-select').hasClass('open')).to.be.true
+        done()
+      })
+    })
+    it('closes when down arrow clicked a second time', (done) => {
+      this.$('.frost-select .down-arrow').click()
+      this.$('.frost-select .down-arrow').click()
+      Ember.run.later(() => {
+        expect(this.$('.frost-select').hasClass('ope')).to.be.false
         done()
       })
     })
@@ -155,8 +161,6 @@ describeComponent(
     })
 
     it('selects the hovered item when enter is pressed', function (done) {
-      let dropDownInput = this.$('.frost-select input')
-
       keyUp(dropDown, 40)
       keyUp(dropDown, 13)
 
@@ -180,7 +184,7 @@ describeComponent(
       })
     })
 
-    it('filters the list when input is typed into', (done) => {
+    it('filters the list when input is typed into', function (done) {
       let input = this.$('.frost-select input')
       input.val('w')
       input[0].oninput({target: input[0]})
@@ -191,7 +195,7 @@ describeComponent(
       })
     })
 
-    it('hovers the only available one if filter leaves one', (done) => {
+    it('hovers the only available one if filter leaves one', function (done) {
       let input = this.$('.frost-select input')
       input.val('w')
       input[0].oninput({target: input[0]})
@@ -203,8 +207,7 @@ describeComponent(
       })
     })
 
-
-    it('calls the supplied callback when an item is selected', (done) => {
+    it('calls the supplied callback when an item is selected', function (done) {
       let listItem = this.$('.frost-select li:first-child')
       listItem.click()
       Ember.run.later(() => {
@@ -213,14 +216,26 @@ describeComponent(
       })
     })
 
-    it('goes into error state when something non-existant is typed', () => {
+    it('goes into error state when something non-existant is typed', function (done) {
       let input = this.$('.frost-select input')
-      input.focus()
-      input.val('zxcv').keyup()
+      this.$('.frost-select').addClass('open')
+      input.val('zxcv').trigger('input')
+      Ember.run.later(() => {
+        let component = this.$('.frost-select')
+        expect(component.hasClass('open')).to.be.false
+        expect(component.hasClass('error')).to.be.true
+        done()
+      })
+    })
+
+    it('closes the list on blur', function (done) {
+      let input = this.$('.frost-select input')
+      this.$('.frost-select').addClass('open')
+      input.blur()
       Ember.run.later(() => {
         let component = this.$('frost-select')
         expect(component.hasClass('open')).to.be.false
-        expect(component.hasClass('error')).to.be.true
+        done()
       })
     })
   }

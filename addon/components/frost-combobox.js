@@ -1,6 +1,5 @@
 import FrostSelect from './frost-select'
-import layout from '../templates/components/frost-combobox';
-import Ember from 'ember';
+import layout from '../templates/components/frost-combobox'
 
 let FrostComboBox = FrostSelect.extend({
   layout,
