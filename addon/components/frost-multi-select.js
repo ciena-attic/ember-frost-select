@@ -19,7 +19,7 @@ let FrostMultiSelect = FrostSelect.extend({
     } else {
       prompt = `${selected.length} items selected`
     }
-    
+
     return prompt
   }),
 
@@ -45,10 +45,20 @@ let FrostMultiSelect = FrostSelect.extend({
     }
   },
 
+  disableInput: Ember.computed('selected', function () {
+    let selected = this.get('selected')
+    return selected.length > 0
+  }),
+
+  search (term) {
+    if (!this.get('disableInput')) {
+      this._super(term)
+    }
+  },
+
   actions: {
     onCheck (data) {
-      console.log(data)
-      console.log('ember sucks')
+      // stub for checkbox action
     },
 
     clearSelection () {

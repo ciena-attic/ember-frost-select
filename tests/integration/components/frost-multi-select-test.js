@@ -1,7 +1,7 @@
 /* jshint expr:true */
 import { expect } from 'chai'
 import { describeComponent, it } from 'ember-mocha'
-import { beforeEach } from 'mocha'
+import { beforeEach, afterEach } from 'mocha'
 import sinon from 'sinon'
 import hbs from 'htmlbars-inline-precompile'
 import Ember from 'ember'
@@ -22,7 +22,6 @@ describeComponent(
     let props
 
     beforeEach(function () {
-      // sandbox = sinon.sandbox.create()
       props = {
         onChange: sinon.spy(),
         data: [
@@ -119,13 +118,20 @@ describeComponent(
     })
 
     it('filters list when none are selected', function (done) {
+      let input = this.$('.frost-select input')
+
+      input.val('kwon').trigger('input')
       wait(() => {
+        expect(this.$('.frost-select li')).to.have.length(1)
         done()
       })
     })
 
     it('does not allow filtering when 1+ are selected', function (done) {
+      this.$('.frost-select li:first-child').click()
       wait(() => {
+        let input = this.$('.frost-select input[type=text]')
+        expect(input.prop('disabled')).to.be.true
         done()
       })
     })
