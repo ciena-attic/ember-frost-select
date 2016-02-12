@@ -59,7 +59,8 @@
     "ember-cli-babel": "^5.1.5",
     "ember-cli-htmlbars": "^1.0.1",
     "ember-cli-sass": "5.1.0",
-    "frost-css": "~1.1.0",
+    "ember-frost-css-core": "^0.2.1",
+    "ember-frost-theme": "^0.2.0",
     "liquid-fire": "0.22.0"
   },
   "ember-addon": {
