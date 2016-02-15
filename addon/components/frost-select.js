@@ -232,7 +232,7 @@ let FrostSelect = Ember.Component.extend({
       // if (this.get('open')) {
       //   this.closeList()
       // }
-      // this.set('focus', false)
+      this.set('focus', false)
     },
 
     onChange (event) {
