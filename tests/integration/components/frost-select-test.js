@@ -123,7 +123,6 @@ describeComponent(
       })
     })
 
-
     it('highlights list items when up-arrowed to', function (done) {
       let dropDown = this.$('.frost-select')
 

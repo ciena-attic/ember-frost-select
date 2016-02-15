@@ -4,11 +4,6 @@ import { describeComponent, it } from 'ember-mocha'
 import { beforeEach, afterEach } from 'mocha'
 import sinon from 'sinon'
 import hbs from 'htmlbars-inline-precompile'
-import Ember from 'ember'
-
-function wait (callback) {
-  Ember.run.later(callback)
-}
 
 const testTemplate = hbs`{{frost-combobox on-change=onChange data=data greeting=greeting}}`
 
