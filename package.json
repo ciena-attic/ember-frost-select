@@ -51,8 +51,7 @@
     "frost-checkbox": "1.1.5",
     "frost-cli": "1.0.9",
     "frost-docs": "~1.1.0",
-    "frost-svg": "~1.1.0",
-    "frost-tabs": "~2.1.0"
+    "frost-svg": "~1.1.0"
   },
   "keywords": [
     "ember-addon"
