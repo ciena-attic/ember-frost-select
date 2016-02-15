@@ -1,3 +1,144 @@
-@import 'frost-core';
-@import 'frost-theme';
-@import './frost-select';
+@import 'node_modules/ember-frost-theme/scss/frost-theme';
+
+@mixin triangle-up($color, $size) {
+  border-bottom: $size solid $color;
+  border-left: $size * .8 solid transparent;
+  border-right: $size * .8 solid transparent;
+  height: 0;
+  width: 0;
+}
+
+.frost-select {
+  border: solid 1px $frost-input-border;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  height: 30px;
+  min-width: 125px;
+  outline: none;
+  position: relative;
+  width: 200px;
+
+  .up-arrow {
+    @include triangle-up($frost-select-container-background, 10px);
+    display: inline-block;
+    left: calc(50% - 15px);
+    overflow: visible;
+    pointer-events: none;
+    position: absolute;
+    right: 8px;
+    top: -10px;
+    z-index: 3;
+  }
+
+  .drop-down-container {
+    background: $frost-select-container-background;
+    border-radius: 3px;
+    box-shadow: 0 0 5px 5px transparentize($frost-select-container-shadow, .5);
+    left: -1px;
+    margin-bottom: 1em;
+    opacity: 0;
+    position: absolute;
+    top: calc(100% + 10px);
+    transition: height .4s ease, opacity .2s ease;
+    width: calc(100% + 2px);
+  }
+
+  input {
+    background: none;
+    border: 0;
+    color: $frost-input;
+    height: 100%;
+    outline: none;
+    overflow: hidden;
+    padding: 0 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 75%;
+  }
+
+  ul {
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0;
+  }
+
+  li {
+    border-bottom: solid 1px $frost-select-item-divider;
+    color: $frost-input;
+    cursor: pointer;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 15px;
+    width: 100%;
+  }
+
+  .hover {
+    background: transparentize($frost-selection, .92);
+  }
+
+  .selected {
+    font-weight: bold;
+  }
+
+  .down-arrow {
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    width: 20px;
+
+    polygon {
+      fill: $frost-select-indicator; 
+    }
+  }
+}
+
+.frost-select.open {
+  .drop-down-container {
+    height: auto;
+    opacity: 1;
+    z-index: 2;
+  }
+}
+
+.frost-select.multi {
+  li {
+    padding: 0 10px;
+  }
+
+  .multi-status {
+    border-top: solid 3px transparentize($frost-select-footer-divider, .88);
+    padding: 10px;
+
+    // TODO frost-button with tertiary style
+    a {
+      color: $frost-button-tertiary;
+      float: right;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  }
+}
+
+.frost-select.focus {
+  border: solid 1px $frost-selection;
+
+  .down-arrow {
+
+    polygon {
+      fill: $frost-selection;
+    }
+  }
+}
+
+.frost-select.error {
+  border: solid 1px $frost-color-danger;
+  .down-arrow {
+    polygon {
+      fill: $frost-select-indicator;
+    }
+  }
+}

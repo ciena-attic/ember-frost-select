@@ -1,5 +1,5 @@
 import Ember from 'ember'
-import layout from '../templates/components/frost-select';
+import layout from '../templates/components/frost-select'
 import _ from 'lodash'
 
 let FrostSelect = Ember.Component.extend({
@@ -95,6 +95,14 @@ let FrostSelect = Ember.Component.extend({
     return valid
   },
 
+  openList () {
+    this.set('open', true)
+  },
+
+  closeList () {
+    this.setProperties({open: false, filter: undefined, hovered: -1})
+  },
+
   toggle (event) {
     event.preventDefault()
     if (this.get('shouldDisable')) {
@@ -102,11 +110,10 @@ let FrostSelect = Ember.Component.extend({
     }
 
     if (this.get('open')) {
-      this.setProperties({open: false, filter: undefined, hovered: -1})
+      this.closeList()
       return
     }
-
-    this.set('open', true)
+    this.openList()
   },
 
   displayItems: Ember.computed('items', 'selected', 'hovered', 'filter', function () {
@@ -144,15 +151,12 @@ let FrostSelect = Ember.Component.extend({
     }
   },
 
-  click () {
-    this.inputEl.focus()
-  },
-
   keyUp (event) {
     switch (event.which) {
 
       // escape key or tab key, close the dropdown
       case 27:
+      case 9:
         if (this.get('open')) {
           this.toggle(event)
         }
@@ -165,14 +169,16 @@ let FrostSelect = Ember.Component.extend({
 
       // up arrow
       case 38:
+        event.preventDefault()
         this.hoverPrev()
         // this.scrollToHovered();
         break
 
       // down arrow, open the dropdown if necessary, select next
       case 40:
+        event.preventDefault()
         if (!this.get('open')) {
-          this.toggle(event)
+          this.openList()
         }
         this.hoverNext()
         // this.scrollToHovered();
@@ -180,8 +186,9 @@ let FrostSelect = Ember.Component.extend({
 
       // backspace
       case 8:
+        event.preventDefault()
         if (!this.get('open')) {
-          this.toggle(event)
+          this.openList()
         }
     }
   },
@@ -215,15 +222,17 @@ let FrostSelect = Ember.Component.extend({
     }
   },
 
-  onBlur (event) {
-    this.set('focus', false)
-    this.toggle(event)
+  click (event) {
+    // event.preventDefault()
   },
 
   actions: {
 
     onBlur (event) {
-      return true
+      // if (this.get('open')) {
+      //   this.closeList()
+      // }
+      // this.set('focus', false)
     },
 
     onChange (event) {
@@ -237,8 +246,13 @@ let FrostSelect = Ember.Component.extend({
       this.set('hovered', index)
     },
 
-    onFocus (event) {
+    onFocus () {
+      this.openList()
       this.set('focus', true)
+      return false
+    },
+
+    onClickArrow (event) {
       this.toggle(event)
     },
 

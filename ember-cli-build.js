@@ -9,7 +9,8 @@ module.exports = function (defaults) {
     },
     sassOptions: {
       includePaths: [
-        frostCore.includePaths
+        'node_modules/ember-frost-css-core/scss',
+        'node_modules/ember-frost-theme/scss'
       ]
     }
   })
