@@ -1,5 +1,6 @@
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-addon')
+var frostCore = require('ember-frost-css-core')
 
 module.exports = function (defaults) {
   var app = new EmberApp(defaults, {
