@@ -42,6 +42,7 @@
     top: calc(100% + 10px);
     transition: height .4s ease, opacity .2s ease;
     width: calc(100% + 2px);
+    pointer-events: none;
   }
 
   input {
@@ -62,6 +63,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     padding: 0;
+    height: 0;
   }
 
   li {
@@ -91,7 +93,7 @@
     width: 20px;
 
     polygon {
-      fill: $frost-select-indicator; 
+      fill: $frost-select-indicator;
     }
   }
 }
@@ -101,6 +103,10 @@
     height: auto;
     opacity: 1;
     z-index: 2;
+    pointer-events: auto;
+    ul {
+      height: auto;
+    }
   }
 }
 
