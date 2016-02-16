@@ -40,7 +40,7 @@ export default Ember.Controller.extend({
     },
     {
       'value': 'Leonard Snart',
-      'label': "Captain Cold"
+      'label': 'Captain Cold'
     }
   ],
   actions: {
