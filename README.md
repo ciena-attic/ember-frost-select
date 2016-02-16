@@ -12,26 +12,74 @@
 # ember-frost-select
 the drop-down select widget to rule them all
 
-This README outlines the details of collaborating on this Ember addon.
+ * [Installation](#Installation)
+ * [API](#API)
+ * [Examples](#Examples)
+ * [Contributing](#Contributing)
 
 ## Installation
+```
+ember install ember-frost-select
+```
+
+## API
+| Attribute | Type | Value | Description |
+| --------- | ---- | ----- | ----------- |
+| `data` | `array` | `[{"label: "foo", "value": "bar"}]` |  An array of "label"/"value" key/value pairs representing the rows in the select drop-down. |
+| `on-change` | `string` | `<action-name>` | The action callback to call when the value of the select component changes |
+
+## Examples
+Assuming the following data is available in the consuming context:
+```
+data = [
+  {
+    "label": "foo",
+    "value": "bar"
+  },
+  {
+    "label": "fizz",
+    "value": "buzz"
+  }
+]
+``` 
+
+### Simple single select
+```
+{{frost-select
+  data=data
+  on-change=(action 'yourCallbackAction')
+}}}
+```
+
+### Multi select
+```
+{{frost-multi-select
+  data=data
+  on-change=(action 'yourCallbackAction')
+}}}
+```
+
+##Contributing
+This following outlines the details of collaborating on this Ember addon:
+
+### Installation
 
 * `git clone` this repository
 * `npm install`
 * `bower install`
 
-## Running
+### Running
 
 * `ember server`
 * Visit your app at http://localhost:4200.
 
-## Running Tests
+### Running Tests
 
 * `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
-## Building
+### Building
 
 * `ember build`
 
