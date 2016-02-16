@@ -3,44 +3,44 @@ import Ember from 'ember'
 export default Ember.Controller.extend({
   data: [
     {
-      'value': 'Lex Diamond',
-      'label': 'Raekwon the Chef'
+      'value': 'Clark Kent',
+      'label': 'Superman'
     },
     {
-      'value': 'Johnny Blaze',
-      'label': 'Method Man'
+      'value': 'Bruce Wayne',
+      'label': 'Batman'
     },
     {
       'value': 'Tony Starks',
-      'label': 'Ghostface'
+      'label': 'Ironman'
     },
     {
-      'value': 'Bobby Steels',
-      'label': 'The RZA'
+      'value': 'Princess Diana',
+      'label': 'Wonder Woman'
     },
     {
-      'value': 'Noodles',
-      'label': 'Masta Killa'
+      'value': 'Barry Allen',
+      'label': 'The Flash'
     },
     {
-      'value': 'Golden Arms',
-      'label': 'U-God'
+      'value': 'Arthur Curry',
+      'label': 'Aquaman'
     },
     {
-      'value': 'Maximillion',
-      'label': 'GZA'
+      'value': 'Hal Jordan',
+      'label': 'Green Lantern'
     },
     {
-      'value': 'Rollie Fingers',
-      'label': 'Inspectah Deck'
+      'value': 'Adam Meadows',
+      'label': 'Atom'
     },
     {
-      'value': 'Cappachino',
-      'label': 'Cappadonna'
+      'value': 'Jaime Reyes',
+      'label': 'Blue Beetle'
     },
     {
-      'value': 'Osirus',
-      'label': "Ol' Dirty Bastard"
+      'value': 'Leonard Snart',
+      'label': 'Captain Cold'
     }
   ],
   actions: {
