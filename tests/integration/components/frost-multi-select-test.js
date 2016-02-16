@@ -1,7 +1,7 @@
 /* jshint expr:true */
 import { expect } from 'chai'
 import { describeComponent, it } from 'ember-mocha'
-import { beforeEach, afterEach } from 'mocha'
+import { beforeEach } from 'mocha'
 import sinon from 'sinon'
 import hbs from 'htmlbars-inline-precompile'
 import Ember from 'ember'

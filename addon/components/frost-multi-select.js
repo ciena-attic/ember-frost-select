@@ -1,8 +1,7 @@
 import FrostSelect from './frost-select'
-import layout from '../templates/components/frost-multi-select';
+import layout from '../templates/components/frost-multi-select'
 import Ember from 'ember'
 import _ from 'lodash'
-
 
 let FrostMultiSelect = FrostSelect.extend({
   layout,

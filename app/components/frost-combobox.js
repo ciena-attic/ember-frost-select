@@ -1,1 +1,2 @@
-export { default } from 'frost-select/components/frost-combobox';
+export { default } from 'frost-select/components/frost-combobox'
+
