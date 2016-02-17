@@ -7,7 +7,16 @@ var options = {
   loaderExclusions: [],
   enableCoverage: true,
   cliOptions: {
-    reporters: ['teamcity'],
+    jsonOptions: {
+      outputFile: 'coverage/coverage.json'
+    },
+    teamcityOptions: {
+      outputFile: 'coverage/teamcity.txt'
+    },
+    lcovOptions: {
+      outputFile: 'coverage/lcov.info'
+    },
+    reporters: ['teamcity', 'json', 'lcov'],
     autostart: true
   }
 }
