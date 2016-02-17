@@ -235,9 +235,10 @@ let FrostSelect = Ember.Component.extend({
     },
 
     onChange (event) {
-      let target = event.currentTarget || event.target
-      if (this.get('on-input') && _.isFunction(this.get('on-input'))) {
-        this.get('on-input')(target.value)
+      const target = event.currentTarget || event.target
+      const onInput = this.get('on-input')
+      if (_.isFunction(onInput)) {
+        onInput(target.value)
       } else {
         this.search(target.value)
       }

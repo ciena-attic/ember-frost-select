@@ -50,4 +50,3 @@ let FrostComboBox = FrostSelect.extend({
 })
 
 export default FrostComboBox
-

@@ -75,6 +75,9 @@
     padding: 0 15px;
     width: 100%;
     .frost-checkbox {
+      input {
+        visibility: hidden;
+      }
       pointer-events: none;
       box-sizing: content-box;
       position: relative;

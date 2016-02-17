@@ -1,7 +1,3 @@
 {
-  "extends": ["frost-standard"],
-  "parser": "babel-eslint",
-  "rules": {
-    "valid-jsdoc": [0]
-  }
+  "extends": ["frost-standard"]
 }
