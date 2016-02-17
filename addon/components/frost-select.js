@@ -156,7 +156,6 @@ let FrostSelect = Ember.Component.extend({
 
       // escape key or tab key, close the dropdown
       case 27:
-      case 9:
         if (this.get('open')) {
           this.toggle(event)
         }
@@ -237,13 +236,19 @@ let FrostSelect = Ember.Component.extend({
 
     onChange (event) {
       let target = event.currentTarget || event.target
-      this.search(target.value)
+      if (this.get('on-input') && _.isFunction(this.get('on-input'))) {
+        this.get('on-input')(target.value)
+      } else {
+        this.search(target.value)
+      }
     },
 
     onItemOver (event) {
+      event.stopImmediatePropagation()
       let target = event.target
       let index = parseInt(target.getAttribute('data-index'), 10)
       this.set('hovered', index)
+      return false
     },
 
     onFocus () {

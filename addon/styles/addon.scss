@@ -10,7 +10,6 @@
 
 .frost-select {
   border: solid 1px $frost-input-border;
-  box-sizing: border-box;
   cursor: pointer;
   display: inline-block;
   height: 30px;
@@ -18,7 +17,7 @@
   outline: none;
   position: relative;
   width: 200px;
-
+  
   .up-arrow {
     @include triangle-up($frost-select-container-background, 10px);
     display: inline-block;
@@ -45,7 +44,7 @@
     pointer-events: none;
   }
 
-  input {
+  input.trigger {
     background: none;
     border: 0;
     color: $frost-input;
@@ -75,6 +74,16 @@
     line-height: 30px;
     padding: 0 15px;
     width: 100%;
+    .frost-checkbox {
+      pointer-events: none;
+      box-sizing: content-box;
+      position: relative;
+      top: -2px;
+      svg {
+        top: 7px;
+        left: 2px;
+      }
+    }
   }
 
   .hover {
