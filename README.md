@@ -27,6 +27,7 @@ ember install ember-frost-select
 | --------- | ---- | ----- | ----------- |
 | `data` | `array` | `[{"label: "foo", "value": "bar"}]` |  An array of "label"/"value" key/value pairs representing the rows in the select drop-down. |
 | `on-change` | `string` | `<action-name>` | The action callback to call when the value of the select component changes |
+| `on-input` | `string` | `<action-name>` | The action callback to call when the value of the filter changes as the user types |
 
 ## Examples
 Assuming the following data is available in the consuming context:
@@ -56,6 +57,15 @@ data = [
 {{frost-multi-select
   data=data
   on-change=(action 'yourCallbackAction')
+}}}
+```
+
+### Simple single select w/ external filtering
+```
+{{frost-select
+  data=data
+  on-change=(action 'yourCallbackAction')
+  on-input=(action 'yourInputFilterCallbackAction')
 }}}
 ```
 
