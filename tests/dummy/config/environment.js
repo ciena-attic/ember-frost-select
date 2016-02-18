@@ -42,6 +42,10 @@ module.exports = function (environment) {
 
   if (environment === 'production') {
     ENV.baseURL = '/ember-frost-select'
+    ENV.isDemo = true
+    ENV['ember-cli-mirage'] = {
+      enabled: true
+    }
   }
 
   return ENV
