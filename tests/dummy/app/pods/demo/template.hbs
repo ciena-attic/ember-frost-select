@@ -3,10 +3,14 @@
 <h2>Drop Down w/ Local Filtering</h2>
 {{frost-select data=data on-change=(action "onChange")}}
 
+<h2>Drop Down w/ Pre Selected Value</h2>
+{{frost-select data=data on-change=(action "onChange") selected=singlePreSelected}}
+
 <h2>Drop Down w/ External Filtering</h2>
 {{frost-select data=data on-change=(action "onChange") on-input=(action "onInput")}}
 
 <h2>Filterable MultiSelect</h2>
 {{frost-multi-select data=data on-change=(action "onChange")}}
 
-
+<h2>Filterable MultiSelect w/ Multiple Pre Selected Values</h2>
+{{frost-multi-select data=data on-change=(action "onChange") selected=multiplePreSelected}}

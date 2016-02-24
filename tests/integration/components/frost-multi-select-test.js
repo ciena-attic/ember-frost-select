@@ -10,7 +10,7 @@ function wait (callback) {
   Ember.run.later(callback)
 }
 
-const testTemplate = hbs`{{frost-multi-select on-change=onChange data=data greeting=greeting}}`
+const testTemplate = hbs`{{frost-multi-select on-change=onChange selected=selected data=data greeting=greeting}}`
 
 describeComponent(
   'frost-multi-select',
@@ -24,6 +24,7 @@ describeComponent(
     beforeEach(function () {
       props = {
         onChange: sinon.spy(),
+        selected: [1, 2],
         data: [
           {
             value: 'Lex Diamond',

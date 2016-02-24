@@ -8,7 +8,7 @@ import $ from 'jquery'
 import _ from 'lodash'
 import Ember from 'ember'
 
-const testTemplate = hbs`{{frost-select on-change=onChange data=data greeting=greeting}}`
+const testTemplate = hbs`{{frost-select on-change=onChange data=data selected=selected greeting=greeting}}`
 
 const keyCodes = {
   'up': 38,
@@ -38,6 +38,7 @@ describeComponent(
 
     beforeEach(function () {
       props = {
+        selected: 1,
         onChange: sinon.spy(),
         data: [
           {
@@ -55,9 +56,7 @@ describeComponent(
         ],
         greeting: 'Hola'
       }
-
       this.setProperties(props)
-
       this.render(testTemplate)
       dropDown = this.$('.frost-select')
     })
@@ -112,12 +111,9 @@ describeComponent(
 
     it('highlights list items when down-arrowed to', function (done) {
       let dropDown = this.$('.frost-select')
-
       keyUp(dropDown, 'down')
-
       Ember.run.later(() => {
         let listItem = this.$('.frost-select li:first-child')
-
         expect(listItem.hasClass('hover')).to.be.true
         done()
       })
@@ -227,15 +223,9 @@ describeComponent(
       })
     })
 
-    it('closes the list on blur', function (done) {
-      let input = this.$('.frost-select input')
-      this.$('.frost-select').addClass('open')
-      input.blur()
-      Ember.run.later(() => {
-        let component = this.$('frost-select')
-        expect(component.hasClass('open')).to.be.false
-        done()
-      })
+    it('respects a pre-selected value', function () {
+      let component = this.$('.frost-select .selected')
+      expect(component.length).to.eql(1)
     })
   }
 )

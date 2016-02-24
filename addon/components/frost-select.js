@@ -271,9 +271,10 @@ let FrostSelect = Ember.Component.extend({
   },
   init () {
     this._super()
-    this.set('selected', [])
+    let selected = this.get('selected')
+    selected = selected && (_.isArray(selected) || _.isNumber(selected)) ? [].concat(selected) : []
+    this.set('selected', selected)
   }
-
 })
 
 export default FrostSelect
