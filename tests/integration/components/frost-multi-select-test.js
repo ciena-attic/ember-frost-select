@@ -10,7 +10,27 @@ function wait (callback) {
   Ember.run.later(callback)
 }
 
-const testTemplate = hbs`{{frost-multi-select on-change=onChange data=data greeting=greeting}}`
+const testTemplate = hbs`{{frost-multi-select on-change=onChange selected=selected data=data greeting=greeting}}`
+
+let props = {
+  onChange: sinon.spy(),
+  selected: [],
+  data: [
+    {
+      value: 'Lex Diamond',
+      label: 'Raekwon'
+    },
+    {
+      value: 'Johnny Blaze',
+      label: 'Method Man'
+    },
+    {
+      value: 'Tony Starks',
+      label: 'Ghostface'
+    }
+  ],
+  greeting: 'Hola'
+}
 
 describeComponent(
   'frost-multi-select',
@@ -19,32 +39,11 @@ describeComponent(
     integration: true
   },
   function () {
-    let props
-
     beforeEach(function () {
-      props = {
-        onChange: sinon.spy(),
-        data: [
-          {
-            value: 'Lex Diamond',
-            label: 'Raekwon'
-          },
-          {
-            value: 'Johnny Blaze',
-            label: 'Method Man'
-          },
-          {
-            value: 'Tony Starks',
-            label: 'Ghostface'
-          }
-        ],
-        greeting: 'Hola'
-      }
-
+      props.selected = []
       Ember.run(() => {
         this.setProperties(props)
       })
-
       this.render(testTemplate)
     })
 
@@ -134,6 +133,28 @@ describeComponent(
         expect(input.prop('disabled')).to.be.true
         done()
       })
+    })
+  }
+  )
+
+describeComponent(
+  'frost-multi-select',
+  'Integration: FrostMultiSelectComponent',
+  {
+    integration: true
+  },
+  function () {
+    beforeEach(function () {
+      props.selected = [1, 2]
+      Ember.run(() => {
+        this.setProperties(props)
+      })
+
+      this.render(testTemplate)
+    })
+
+    it('respects pre-selected values', function () {
+      expect(this.$('.frost-select .selected')).to.have.length(2)
     })
   }
 )
