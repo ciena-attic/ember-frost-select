@@ -6,7 +6,7 @@ import sinon from 'sinon'
 import hbs from 'htmlbars-inline-precompile'
 import Ember from 'ember'
 
-function wait(callback) {
+function wait (callback) {
   Ember.run.later(callback)
 }
 
