@@ -227,5 +227,25 @@ describeComponent(
       let component = this.$('.frost-select .selected')
       expect(component.length).to.eql(1)
     })
+
+    it('sets the prompt to the selected value when the drop down list is closed', function (done) {
+      let input = this.$('.frost-select input')
+      keyUp(dropDown, 'down')
+      keyUp(dropDown, 13) // Enter key, select the item
+
+      Ember.run.later(() => {
+        input.val('')
+        keyUp(dropDown, 'down')
+        keyUp(dropDown, 'esc')
+
+        Ember.run.later(() => {
+          let select = this.$('.frost-select')
+          let input = this.$('.frost-select input')
+          expect(select.hasClass('open')).to.be.false
+          expect(input.val()).to.eql('Raekwon')
+          done()
+        })
+      })
+    })
   }
 )
