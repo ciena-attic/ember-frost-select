@@ -167,7 +167,6 @@ let FrostSelect = Ember.Component.extend({
       case 38:
         event.preventDefault()
         this.hoverPrev()
-        // this.scrollToHovered();
         break
 
       // down arrow, open the dropdown if necessary, select next
@@ -177,7 +176,6 @@ let FrostSelect = Ember.Component.extend({
           this.openList()
         }
         this.hoverNext()
-        // this.scrollToHovered();
         break
 
       // backspace
@@ -225,9 +223,6 @@ let FrostSelect = Ember.Component.extend({
   actions: {
 
     onBlur (event) {
-      // if (this.get('open')) {
-      //   this.closeList()
-      // }
       this.set('focus', false)
     },
 
