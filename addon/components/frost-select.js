@@ -41,10 +41,6 @@ let FrostSelect = Ember.Component.extend({
     return this.get('error') || this.get('disabled')
   }),
 
-  didInsertElement () {
-    this.set('inputEl', this.$('input'))
-  },
-
   inputElement () {
     return this.$('input')
   },
@@ -101,6 +97,7 @@ let FrostSelect = Ember.Component.extend({
 
   closeList () {
     this.setProperties({open: false, filter: undefined, hovered: -1})
+    this.inputElement().val(this.get('prompt'))
   },
 
   toggle (event) {
