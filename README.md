@@ -32,7 +32,7 @@ ember install ember-frost-select
 
 ## Examples
 Assuming the following data is available in the consuming context:
-```
+```javascript
 data = [
   {
     "label": "foo",
@@ -46,7 +46,7 @@ data = [
 
 singleSelected = 1
 multipleSelected = [1, 2]
-``` 
+```
 
 ### Simple single select
 ```
