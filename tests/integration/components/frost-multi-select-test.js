@@ -10,7 +10,7 @@ function wait (callback) {
   Ember.run.later(callback)
 }
 
-const testTemplate = hbs`{{frost-multi-select on-change=onChange selected=selected data=data greeting=greeting}}`
+const testTemplate = hbs`{{frost-multi-select on-change=onChange selected=selected data=data greeting=greeting selectedValue=selectedValue}}`
 
 let props = {
   onChange: sinon.spy(),
@@ -134,8 +134,20 @@ describeComponent(
         done()
       })
     })
+
+    it('allows for setting multiple values using the selectedValue attribute', function (done) {
+      this.set('selectedValue', ['Lex Diamond', 'Tony Starks', 'Johnny Blaze'])
+
+      wait(() => {
+        let input = this.$('.frost-select .trigger')
+
+        expect(input.val()).to.eql('3 items selected')
+        expect(props.onChange.called).to.be.true
+        done()
+      })
+    })
   }
-  )
+)
 
 describeComponent(
   'frost-multi-select',

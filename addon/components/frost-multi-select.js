@@ -55,6 +55,24 @@ let FrostMultiSelect = FrostSelect.extend({
     }
   },
 
+  selectOptionByValue (selectedValue) {
+    let items = this.get('items')
+    if (_.isArray(selectedValue)) {
+      let selected = selectedValue.map(function (value) {
+        return _.findIndex(items, (item) => _.isEqual(item.value, value))
+      }).filter(function (value) {
+        return value >= 0
+      })
+      this.set('selected', selected)
+      let values = this.getValues(selected)
+      this.set('filter', undefined)
+      if (this.get('on-change') && _.isFunction(this.get('on-change'))) {
+        this.get('on-change')(values)
+      }
+    } else {
+      this._super(selectedValue)
+    }
+  },
   actions: {
     onCheck (data) {
       // stub for checkbox action
