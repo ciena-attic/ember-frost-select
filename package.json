@@ -45,7 +45,7 @@
     "ember-resolver": "^2.0.3",
     "ember-sinon": "0.3.0",
     "ember-truth-helpers": "^1.2.0",
-    "ember-try": "~0.0.8",
+    "ember-try": "^0.2.0",
     "eslint": "^1.10.3",
     "eslint-config-frost-standard": "^0.2.5"
   },
