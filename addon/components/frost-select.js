@@ -261,11 +261,42 @@ let FrostSelect = Ember.Component.extend({
       this.select(index)
     }
   },
+  selectOptionByValue (selectedValue) {
+    // Find index
+    let valueIndex = _.findIndex(this.get('items'), (item) => _.isEqual(item.value, selectedValue))
+
+    if (valueIndex >= 0) { // Make sure we actually found the value
+      this.select(valueIndex)
+    }
+  },
+  didReceiveAttrs (attrs) {
+    this._super(...arguments)
+    function attrIsDifferent (newAttrs, oldAttrs, attributeName) {
+      let oldValue = _.get(oldAttrs, attributeName + '.value')
+      let newValue = _.get(newAttrs, attributeName + '.value')
+
+      if (newValue && !_.isEqual(oldValue, newValue)) {
+        return true
+      }
+      return false
+    }
+
+    if (attrIsDifferent(attrs.newAttrs, attrs.oldAttrs, 'selected')) {
+      let selected = this.get('selected')
+
+      selected = selected && (_.isArray(selected) || _.isNumber(selected)) ? [].concat(selected) : []
+      this.set('selected', selected)
+    }
+    if (attrIsDifferent(attrs.newAttrs, attrs.oldAttrs, 'selectedValue')) {
+      this.selectOptionByValue(attrs.newAttrs.selectedValue.value)
+    }
+  },
   init () {
-    this._super()
-    let selected = this.get('selected')
-    selected = selected && (_.isArray(selected) || _.isNumber(selected)) ? [].concat(selected) : []
-    this.set('selected', selected)
+    this._super(...arguments)
+
+    if (this.get('selected') === undefined) {
+      this.set('selected', [])
+    }
   }
 })
 
