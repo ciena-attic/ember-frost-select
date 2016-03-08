@@ -281,14 +281,13 @@ let FrostSelect = Ember.Component.extend({
       return false
     }
 
-    if (attrIsDifferent(attrs.newAttrs, attrs.oldAttrs, 'selected')) {
+    if (attrIsDifferent(attrs.newAttrs, attrs.oldAttrs, 'selectedValue')) {
+      this.selectOptionByValue(attrs.newAttrs.selectedValue.value)
+    } else if (attrIsDifferent(attrs.newAttrs, attrs.oldAttrs, 'selected')) {
       let selected = this.get('selected')
 
       selected = selected && (_.isArray(selected) || _.isNumber(selected)) ? [].concat(selected) : []
       this.set('selected', selected)
-    }
-    if (attrIsDifferent(attrs.newAttrs, attrs.oldAttrs, 'selectedValue')) {
-      this.selectOptionByValue(attrs.newAttrs.selectedValue.value)
     }
   },
   init () {
