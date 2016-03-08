@@ -54,23 +54,26 @@ let FrostMultiSelect = FrostSelect.extend({
       this._super(term)
     }
   },
-
   selectOptionByValue (selectedValue) {
+    if (_.isUndefined(selectedValue)) {
+      return
+    }
+
     let items = this.get('items')
-    if (_.isArray(selectedValue)) {
-      let selected = selectedValue.map(function (value) {
-        return _.findIndex(items, (item) => _.isEqual(item.value, value))
-      }).filter(function (value) {
-        return value >= 0
-      })
-      this.set('selected', selected)
-      let values = this.getValues(selected)
-      this.set('filter', undefined)
-      if (this.get('on-change') && _.isFunction(this.get('on-change'))) {
-        this.get('on-change')(values)
-      }
-    } else {
-      this._super(selectedValue)
+
+    if (!_.isArray(selectedValue)) {
+      selectedValue = [selectedValue]
+    }
+    let selected = selectedValue.map(function (value) {
+      return _.findIndex(items, (item) => _.isEqual(item.value, value))
+    }).filter(function (value) {
+      return value >= 0
+    })
+    this.set('selected', selected)
+    let values = this.getValues(selected)
+    this.set('filter', undefined)
+    if (this.get('on-change') && _.isFunction(this.get('on-change'))) {
+      this.get('on-change')(values)
     }
   },
   actions: {

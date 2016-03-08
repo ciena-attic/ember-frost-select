@@ -146,6 +146,19 @@ describeComponent(
         done()
       })
     })
+
+    it('overwrites selection if selectedValue is set', function (done) {
+      this.$('.frost-select li:first-child').click()
+      wait(() => {
+        this.set('selectedValue', 'Tony Starks')
+        wait(() => {
+          let input = this.$('.frost-select .trigger')
+          expect(input.val()).to.eql('Ghostface')
+
+          done()
+        })
+      })
+    })
   }
 )
 
