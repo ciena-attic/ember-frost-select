@@ -50,10 +50,7 @@
     "ember-truth-helpers": "^1.2.0",
     "ember-try": "^0.2.0",
     "eslint": "^1.10.3",
-    "eslint-config-frost-standard": "^0.2.5",
-    "js": "0.1.0",
-    "phantom": "2.0.4",
-    "phantomjs": "2.1.3"
+    "eslint-config-frost-standard": "^0.2.5"
   },
   "keywords": [
     "ember-addon",
