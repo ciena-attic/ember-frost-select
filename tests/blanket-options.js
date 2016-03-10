@@ -7,17 +7,14 @@ var options = {
   loaderExclusions: [],
   enableCoverage: true,
   cliOptions: {
-    jsonOptions: {
-      outputFile: 'coverage/coverage.json'
-    },
-    teamcityOptions: {
-      outputFile: 'coverage/teamcity.txt'
-    },
+    reporters: ['lcov'],
+    autostart: true,
     lcovOptions: {
-      outputFile: 'coverage/lcov.info'
-    },
-    reporters: ['teamcity', 'json', 'lcov'],
-    autostart: true
+      outputFile: 'coverage/lcov.info',
+      renamer: function (fileName) {
+        return fileName.replace('ember-frost-select', 'addon') + '.js'
+      }
+    }
   }
 }
 
