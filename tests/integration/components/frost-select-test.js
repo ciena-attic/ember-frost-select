@@ -8,7 +8,13 @@ import $ from 'jquery'
 import _ from 'lodash'
 import Ember from 'ember'
 
-const testTemplate = hbs`{{frost-select on-change=onChange data=data selected=selected greeting=greeting}}`
+const testTemplate = hbs`{{frost-select
+  on-change=onChange
+  data=data
+  selected=selected
+  greeting=greeting
+  selectedValue=selVal
+}}`
 
 const keyCodes = {
   'up': 38,
@@ -219,6 +225,7 @@ describeComponent(
         let component = this.$('.frost-select')
         expect(component.hasClass('open')).to.be.false
         expect(component.hasClass('error')).to.be.true
+
         done()
       })
     })
@@ -245,6 +252,18 @@ describeComponent(
           expect(input.val()).to.eql('Raekwon')
           done()
         })
+      })
+    })
+
+    it('sets the prompt and value from a component attribute', function (done) {
+      this.set('selVal', 'Tony Starks')
+
+      Ember.run.later(() => {
+        let input = this.$('.frost-select input')
+
+        expect(input.val()).to.be.eql('Ghostface')
+        expect(props.onChange.called).to.be.true
+        done()
       })
     })
   }
