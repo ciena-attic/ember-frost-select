@@ -1,7 +1,0 @@
-##teamcity[message text='Code Coverage is NaN%']
-##teamcity[blockOpened name='Code Coverage Summary']
-##teamcity[buildStatisticValue key='CodeCoverageB' value='NaN']
-##teamcity[buildStatisticValue key='CodeCoverageAbsLCovered' value='0']
-##teamcity[buildStatisticValue key='CodeCoverageAbsLTotal' value='0']
-##teamcity[buildStatisticValue key='CodeCoverageL' value='NaN']
-##teamcity[blockClosed name='Code Coverage Summary']
