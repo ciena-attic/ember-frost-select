@@ -15,7 +15,7 @@ let FrostSelect = Ember.Component.extend({
   maxListHeight: 400,
 
   style: Ember.computed('width', function () {
-    return `width: ${this.get('width') }px`
+    return `width: ${this.get('width')}px`
   }),
 
   items: Ember.computed('data', function () {
