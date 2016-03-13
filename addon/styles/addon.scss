@@ -17,7 +17,7 @@
   outline: none;
   position: relative;
   width: 200px;
-  
+
   .up-arrow {
     @include triangle-up($frost-select-container-background, 10px);
     display: inline-block;
@@ -132,7 +132,7 @@
     padding: 10px;
 
     // TODO frost-button with tertiary style
-    a {
+    .clear {
       color: $frost-button-tertiary;
       float: right;
       font-weight: bold;
