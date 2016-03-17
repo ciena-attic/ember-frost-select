@@ -83,7 +83,7 @@
       position: relative;
       top: -2px;
       svg {
-        top: 7px;
+        top: 13px;
         left: 2px;
       }
     }
@@ -146,7 +146,6 @@
     .clear {
       color: $frost-button-tertiary;
       float: right;
-      font-weight: bold;
       text-decoration: none;
     }
   }
@@ -156,7 +155,6 @@
   border: solid 1px $frost-selection;
 
   .down-arrow {
-
     polygon {
       fill: $frost-selection;
     }
