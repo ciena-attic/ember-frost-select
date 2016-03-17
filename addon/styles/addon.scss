@@ -1,5 +1,7 @@
 @import 'node_modules/ember-frost-theme/scss/frost-theme';
 
+$frost-input-text-height: 35px; // TODO: get this from theme?
+
 @mixin triangle-up($color, $size) {
   border-bottom: $size solid $color;
   border-left: $size * .8 solid transparent;
@@ -12,7 +14,7 @@
   border: solid 1px $frost-input-border;
   cursor: pointer;
   display: inline-block;
-  height: 30px;
+  height: $frost-input-text-height;
   min-width: 125px;
   outline: none;
   position: relative;
@@ -66,12 +68,12 @@
   }
 
   li {
-    border-bottom: solid 1px $frost-select-item-divider;
+    border-bottom: solid 1px $frost-color-lgrey-2;
     color: $frost-input;
     cursor: pointer;
     display: inline-block;
-    height: 30px;
-    line-height: 30px;
+    height: 45px;
+    line-height: 45px;
     padding: 0 15px;
     width: 100%;
     .frost-checkbox {
@@ -83,7 +85,7 @@
       position: relative;
       top: -2px;
       svg {
-        top: 7px;
+        top: 13px;
         left: 2px;
       }
     }
@@ -129,13 +131,13 @@
 
   .multi-status {
     border-top: solid 3px transparentize($frost-select-footer-divider, .88);
+    border-bottom: solid 5px $frost-color-lgrey-2;
     padding: 10px;
 
     // TODO frost-button with tertiary style
     .clear {
       color: $frost-button-tertiary;
       float: right;
-      font-weight: bold;
       text-decoration: none;
     }
   }
@@ -145,7 +147,6 @@
   border: solid 1px $frost-selection;
 
   .down-arrow {
-
     polygon {
       fill: $frost-selection;
     }

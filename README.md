@@ -1,5 +1,3 @@
-[ci-img]: https://img.shields.io/travis/ciena-frost/ember-frost-select.svg "Travis CI Build Status"
-[ci-url]: https://travis-ci.org/ciena-frost/ember-frost-select
 
 [cov-img]: https://img.shields.io/coveralls/ciena-frost/ember-frost-select.svg "Coveralls Code Coverage"
 [cov-url]: https://coveralls.io/github/ciena-frost/ember-frost-select
@@ -26,7 +24,8 @@ ember install ember-frost-select
 | Attribute       | Type | Value | Description |
 | --------------- | ---- | ----- | ----------- |
 | `data`          | `array` | `[{"label: "foo", "value": "bar"}]` |  An array of "label"/"value" key/value pairs representing the rows in the select drop-down. |
-| `disabled`      | `boolean` | `true`/`false` |  disable/enable the component |
+| `disabled`      | `boolean` | `true`/`false` | disable/enable the component |
+| `error`         | `boolean` | `true`/`false` | tell component to render an error styling |
 | `on-change`     | `string` | `<action-name>` | The action callback to call when the value of the select component changes |
 | `on-input`      | `string` | `<action-name>` | The action callback to call when the value of the filter changes as the user types |
 | `selected`      | `number` or `array` | `1` or `[1, 2]` | The indices of the pre-selected values corresponding to values in the passed-in data. |

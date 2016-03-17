@@ -48,10 +48,11 @@ export default FrostSelect.extend({
   /**
    * Input should be disabled if anything is selected
    * @param {Number[]} selected - the selected indices
+   * @param {Boolean} disabled - the selected indices
    * @returns {Boolean} true if anything is selected
    */
-  disableInput (selected) {
-    return selected.length > 0
+  disableInput (selected, disabled) {
+    return disabled || (selected.length > 0)
   },
 
   // ==========================================================================

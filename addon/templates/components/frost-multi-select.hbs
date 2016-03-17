@@ -15,6 +15,10 @@
 </div>
 
 <div class="drop-down-container">
+  <div class="multi-status">
+    <span class="number-selected">{{selected.length}} selected</span>
+    <span class="clear" tabIndex={-1} onClick={{action 'clearSelection'}}>Clear all</span>
+  </div>
   <div class="list-container">
     <div class="up-arrow"></div>
     <ul ref="container" style="max-height: {{maxListHeight}}px">
@@ -37,9 +41,5 @@
     </ul>
   </div>
 
-  <div class="multi-status">
-    <span class="number-selected">{{selected.length}} selected</span>
-    <span class="clear" tabIndex={-1} onClick={{action 'clearSelection'}}>Clear</span>
-  </div>
 </div>
 {{yield}}
