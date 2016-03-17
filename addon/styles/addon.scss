@@ -66,12 +66,12 @@
   }
 
   li {
-    border-bottom: solid 1px $frost-select-item-divider;
+    border-bottom: solid 1px $frost-color-lgrey-2;
     color: $frost-input;
     cursor: pointer;
     display: inline-block;
-    height: 30px;
-    line-height: 30px;
+    height: 45px;
+    line-height: 45px;
     padding: 0 15px;
     width: 100%;
     .frost-checkbox {
@@ -108,6 +108,16 @@
       fill: $frost-select-indicator;
     }
   }
+
+  &.disabled {
+    border: 1px solid $frost-color-lgrey-1;
+    background: $frost-color-lgrey-3;
+    cursor: auto;
+
+    input.trigger {
+      color: $frost-color-grey-6;
+    }
+  }
 }
 
 .frost-select.open {
@@ -129,6 +139,7 @@
 
   .multi-status {
     border-top: solid 3px transparentize($frost-select-footer-divider, .88);
+    border-bottom: solid 5px $frost-color-lgrey-2;
     padding: 10px;
 
     // TODO frost-button with tertiary style
