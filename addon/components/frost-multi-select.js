@@ -44,9 +44,9 @@ let FrostMultiSelect = FrostSelect.extend({
     }
   },
 
-  disableInput: Ember.computed('selected', function () {
+  disableInput: Ember.computed('selected', 'disabled', function () {
     let selected = this.get('selected')
-    return selected.length > 0
+    return this.get('disabled') || selected.length > 0
   }),
 
   search (term) {

@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 let FrostSelect = Ember.Component.extend({
   classNames: ['frost-select'],
-  classNameBindings: ['focus', 'shouldOpen:open', 'error'],
+  classNameBindings: ['focus', 'shouldOpen:open', 'error', 'disabled'],
   attributeBindings: ['tabIndex'],
   tabIndex: -1,
   hovered: -1,
@@ -251,7 +251,9 @@ let FrostSelect = Ember.Component.extend({
     },
 
     onClickArrow (event) {
-      this.toggle(event)
+      if (!this.get('disabled')) {
+        this.toggle(event)
+      }
     },
 
     onSelect (event) {

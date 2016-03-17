@@ -11,8 +11,8 @@ module.exports = {
   afterInstall: function () {
     return this.addAddonsToProject({
       packages: [
-        {name: 'ember-frost-theme', target: '^1.0.3'},
-        {name: 'ember-frost-checkbox', target: '^1.1.0'}
+        {name: 'ember-frost-theme', target: '^1.4.1'},
+        {name: 'ember-frost-checkbox', target: '^1.2.0'}
       ]
     })
   }

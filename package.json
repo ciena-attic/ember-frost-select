@@ -19,7 +19,8 @@
   },
   "author": "Chris Stoll (https://github.com/cstolli",
   "contributors": [
-    "Matthew Dahl (https://github.com/sandersky)"
+    "Matthew Dahl (https://github.com/sandersky)",
+    "Roxanne Panthaky (https://github.com/rox163)"
   ],
   "license": "MIT",
   "devDependencies": {
@@ -35,14 +36,15 @@
     "ember-cli-mirage": "^0.1.11",
     "ember-cli-mocha": "0.10.1",
     "ember-cli-notifications": "^3.2.0",
+    "ember-cli-sass": "5.3.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-computed-decorators": "^0.2.2",
     "ember-data": "^2.4.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
-    "ember-frost-checkbox": "^1.1.0",
+    "ember-frost-checkbox": "^1.2.0",
     "ember-frost-css-core": "^1.1.2",
-    "ember-frost-theme": "^1.3.1",
+    "ember-frost-theme": "^1.4.1",
     "ember-load-initializers": "^0.5.1",
     "ember-lodash": "^0.0.6",
     "ember-mocha": "^0.8.11",
