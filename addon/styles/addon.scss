@@ -160,3 +160,21 @@
     }
   }
 }
+
+.frost-select.disabled {
+  background-color: $frost-color-input-disabled-bg;
+  border: 1px solid $frost-color-input-disabled-border;
+  color: $frost-color-grey-6;
+  cursor: default;
+
+  input {
+    color: inherit;
+  }
+
+  .down-arrow {
+    polygon {
+      fill: $frost-color-grey-6;
+    }
+  }
+}
+

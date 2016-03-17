@@ -29,7 +29,7 @@ export default Ember.Component.extend({
 
   attributeBindings: ['tabIndex'],
   classNames: ['frost-select'],
-  classNameBindings: ['focus', 'shouldOpen:open', 'error'],
+  classNameBindings: ['focus', 'shouldOpen:open', 'disabled', 'error'],
   disabled: false,
   hovered: -1,
   filter: undefined,

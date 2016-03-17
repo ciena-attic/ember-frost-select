@@ -1,10 +1,12 @@
 <input
+  autocomplete=false
   class="trigger"
-  type="text"
-  value={{prompt}}
+  disabled={{disabled}}
   onFocus={{action 'onFocus'}}
   onBlur={{action 'onBlur'}}
   onInput={{action 'onChange'}}
+  type="text"
+  value={{prompt}}
 >
 
 <div class="down-arrow" onClick={{action 'onClickArrow'}}>
