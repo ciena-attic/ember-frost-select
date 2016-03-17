@@ -31,7 +31,7 @@ export default Ember.Component.extend({
   classNames: ['frost-select'],
   classNameBindings: ['focus', 'shouldOpen:open', 'disabled', 'hasError:error'],
   disabled: false,
-  errorMsg: '',
+  error: false,
   hovered: -1,
   filter: undefined,
   layout,
@@ -76,7 +76,20 @@ export default Ember.Component.extend({
   },
 
   @readOnly
-  @computed('displayItems')
+  @computed('error', 'invalidFilter')
+  /**
+   * Computed flag for if consumer flagged us as having an error, or if the user has typed
+   * something bad.
+   * @param {Boolean} error - true if consumer has flagged that an error exists
+   * @param {Boolean} invalidFilter - true if the user has typed something that doesn't match an option
+   * @returns {Boolean} true if either error condition occured
+   */
+  hasError (error, invalidFilter) {
+    return error || invalidFilter
+  },
+
+  @readOnly
+  @computed('data', 'displayItems')
   /**
    * Flag for if the user has typed something that doesn't match any options
    * @param {Object[]} data - all the possible items
@@ -84,7 +97,7 @@ export default Ember.Component.extend({
    * @returns {Boolean} true if in error state
    */
   invalidFilter (data, displayItems) {
-    return data && (data.length > 0) && displayItems && (displayItems.length === 0)
+    return _.isArray(data) && (data.length > 0) && _.isArray(displayItems) && (displayItems.length === 0)
   },
 
   @readOnly

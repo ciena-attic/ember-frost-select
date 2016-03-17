@@ -90,10 +90,20 @@
     <div class="title">Error</div>
     <div class="snippet">
       {{format-markdown "```handlebars
+{{frost-select
+  data=data
+  error=true
+  on-change=(action 'onChange')
+}}
 ```"
       }}
     </div>
     <div class="demo">
+      {{frost-select
+        data=data
+        error=true
+        on-change=(action 'onChange')
+      }}
     </div>
   </div>
 </div>
@@ -168,10 +178,20 @@
     <div class="title">Error</div>
     <div class="snippet">
       {{format-markdown "```handlebars
+{{frost-multi-select
+  data=data
+  error=true
+  on-change=(action 'onChange')
+}}
 ```"
       }}
     </div>
     <div class="demo">
+      {{frost-multi-select
+        data=data
+        error=true
+        on-change=(action 'onChange')
+      }}
     </div>
   </div>
 </div>
