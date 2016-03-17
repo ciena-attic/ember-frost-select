@@ -17,8 +17,10 @@ export default Ember.Controller.extend({
     }
     return result
   }),
-  singlePreSelected: 1,
-  multiplePreSelected: [1, 2],
+
+  selectedIndex: 1,
+  selectedIndices: [1, 2],
+
   actions: {
     onChange (values) {
       console.log('User selected: ' + values)

@@ -36,7 +36,7 @@
     "ember-cli-mocha": "0.10.1",
     "ember-cli-notifications": "^3.2.0",
     "ember-cli-uglify": "^1.2.0",
-    "ember-computed-decorators": "^0.2.2",
+    "ember-computed-decorators": "0.2.2",
     "ember-data": "^2.4.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
@@ -52,7 +52,8 @@
     "ember-try": "^0.2.0",
     "eslint": "2.2.0",
     "eslint-config-frost-standard": "^1.0.0",
-    "loader.js": "^4.0.1"
+    "loader.js": "^4.0.1",
+    "markdown-code-highlighting": "0.0.6"
   },
   "keywords": [
     "ember-addon",
