@@ -29,8 +29,9 @@ export default Ember.Component.extend({
 
   attributeBindings: ['tabIndex'],
   classNames: ['frost-select'],
-  classNameBindings: ['focus', 'shouldOpen:open', 'disabled', 'error'],
+  classNameBindings: ['focus', 'shouldOpen:open', 'disabled', 'hasError:error'],
   disabled: false,
+  errorMsg: '',
   hovered: -1,
   filter: undefined,
   layout,
@@ -77,12 +78,13 @@ export default Ember.Component.extend({
   @readOnly
   @computed('displayItems')
   /**
-   * Flag for if we have an error (nothing selected means error? -- ARM)
+   * Flag for if the user has typed something that doesn't match any options
+   * @param {Object[]} data - all the possible items
    * @param {Object[]} displayItems - the current items being displayed
    * @returns {Boolean} true if in error state
    */
-  error (displayItems) {
-    return (displayItems.length === 0)
+  invalidFilter (data, displayItems) {
+    return data && (data.length > 0) && displayItems && (displayItems.length === 0)
   },
 
   @readOnly
@@ -127,28 +129,28 @@ export default Ember.Component.extend({
   },
 
   @readOnly
-  @computed('error', 'open')
+  @computed('invalidFilter', 'shouldDisableDropDown', 'open')
   /**
    * Determine if drop-down should open
-   * @param {Boolean} error - are we in an error state?
+   * @param {Boolean} invalidFilter - did the user goof?
+   * @param {Boolean} shouldDisableDropDown - computed flag for whether opening the drop-down should be disabled
    * @param {Boolean} open - TODO: what is this?
-   * @param {Boolean} shouldDisable - computed flag for whether opening the drop-down should be disabled
    * @returns {Boolean} true if we should open
    */
-  shouldOpen (error, open, shouldDisable) {
-    return !error && !shouldDisable && open
+  shouldOpen (invalidFilter, shouldDisableDropDown, open) {
+    return !invalidFilter && !shouldDisableDropDown && open
   },
 
   @readOnly
-  @computed('error', 'disabled')
+  @computed('invalidFilter', 'disabled')
   /**
    * Determine if we should disable opening the drop-down
-   * @param {Boolean} error - are we in an error state?
+   * @param {Boolean} invalidFilter - did the user goof?
    * @param {Boolean} disabled - are we in a disabled state?
    * @returns {Boolean} true if opening should be disabled
    */
-  shouldDisable (error, disabled) {
-    return error || disabled
+  shouldDisableDropDown (invalidFilter, disabled) {
+    return invalidFilter || disabled
   },
 
   @readOnly
@@ -354,7 +356,7 @@ export default Ember.Component.extend({
   // TODO: add jsdoc
   toggle (event) {
     event.preventDefault()
-    if (this.get('shouldDisable')) {
+    if (this.get('shouldDisableDropDown')) {
       return
     }
 
