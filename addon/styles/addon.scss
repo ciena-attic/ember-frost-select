@@ -1,6 +1,8 @@
 @import 'node_modules/ember-frost-theme/scss/frost-theme';
 
-$frost-input-text-height: 35px; // TODO: get this from theme?
+// TODO: get these from theme?
+$frost-input-text-height: 35px;
+$frost-input-select-option-row-height: 35px;
 
 @mixin triangle-up($color, $size) {
   border-bottom: $size solid $color;
@@ -72,8 +74,8 @@ $frost-input-text-height: 35px; // TODO: get this from theme?
     color: $frost-input;
     cursor: pointer;
     display: inline-block;
-    height: 45px;
-    line-height: 45px;
+    height: $frost-input-select-option-row-height;
+    line-height: $frost-input-select-option-row-height;
     padding: 0 15px;
     width: 100%;
     .frost-checkbox {
