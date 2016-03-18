@@ -203,6 +203,20 @@ export default Ember.Component.extend({
     }
   },
 
+  /* Ember.didInsertElement method */
+  didInsertElement () {
+    this._super(...arguments)
+    const outsideClickHandler = this.get('handleOutsideClick').bind(this)
+    Ember.$(document).on('click', outsideClickHandler)
+  },
+
+  /* Ember.willDestroyElement method */
+  willDestroyElement () {
+    const outsideClickHandler = this.get('handleOutsideClick').bind(this)
+    Ember.$(document).on('click', outsideClickHandler)
+    this._super(...arguments)
+  },
+
   // TODO: add jsdoc
   chooseHovered () {
     let displayItem = this.get('displayItems')[this.get('hovered')]
@@ -269,9 +283,28 @@ export default Ember.Component.extend({
     this.set('hovered', hovered)
   },
 
+  handleOutsideClick (event) {
+    const $target = Ember.$(event.target)
+    if (!$target.closest(this.$()).length) {
+      this.onOutsideClick()
+    }
+  },
+
   // TODO: add jsdoc
   inputElement () {
     return this.$('input')
+  },
+
+  /** Key down event handler
+   * @param {JQuery.Event} event - event object
+   */
+  keyDown (event) {
+    // if tab is pushed - close list
+    if (event.which === 9) {
+      if (this.get('open')) {
+        this.closeList()
+      }
+    }
   },
 
   // TODO: add jsdoc
@@ -280,6 +313,7 @@ export default Ember.Component.extend({
 
       // escape key or tab key, close the dropdown
       case 27:
+        event.stopPropagation()
         if (this.get('open')) {
           this.toggle(event)
         }
@@ -330,6 +364,14 @@ export default Ember.Component.extend({
   /* obvious */
   openList () {
     this.set('open', true)
+  },
+
+  /** Handler for click outside of an element
+   */
+  onOutsideClick () {
+    if (this.get('open')) {
+      this.closeList()
+    }
   },
 
   // TODO: add jsdoc
