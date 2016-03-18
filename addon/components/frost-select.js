@@ -17,7 +17,9 @@ function isAttrDifferent (newAttrs, oldAttrs, attributeName) {
   return false
 }
 
-/** Hook for handling outside element click */
+/** Hook for handling outside element click
+ * @param {Object} event - JQuery event object
+ */
 function handleOutsideClick (event) {
   const $target = Ember.$(event.target)
   if (!$target.closest(this.$()).length) {
@@ -295,8 +297,6 @@ export default Ember.Component.extend({
     }
     this.set('hovered', hovered)
   },
-
-
 
   // TODO: add jsdoc
   inputElement () {
