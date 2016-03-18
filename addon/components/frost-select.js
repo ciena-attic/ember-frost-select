@@ -207,6 +207,13 @@ export default Ember.Component.extend({
     }
   },
 
+  /** obvious */
+  bindDropdownEvents () {
+    const _handleOutsideClick = handleOutsideClick.bind(this)
+    Ember.$(document).on('click', _handleOutsideClick)
+    this.set('handleOutsideClick', _handleOutsideClick)
+  },
+
   /* Ember.Component method */
   didReceiveAttrs (attrs) {
     this._super(...arguments)
@@ -218,18 +225,6 @@ export default Ember.Component.extend({
       selected = selected && (_.isArray(selected) || _.isNumber(selected)) ? [].concat(selected) : []
       this.set('selected', selected)
     }
-  },
-
-  /* Ember.didInsertElement method */
-  didInsertElement () {
-    this._super(...arguments)
-    Ember.$(document).on('click', handleOutsideClick.bind(this))
-  },
-
-  /* Ember.willDestroyElement method */
-  willDestroyElement () {
-    Ember.$(document).off('click', handleOutsideClick.bind(this))
-    this._super(...arguments)
   },
 
   // TODO: add jsdoc
@@ -247,6 +242,7 @@ export default Ember.Component.extend({
   closeList () {
     this.setProperties({open: false, filter: undefined, hovered: -1})
     this.inputElement().val(this.get('prompt'))
+    this.unbindDropdownEvents()
   },
 
   // TODO: add jsdoc
@@ -372,14 +368,13 @@ export default Ember.Component.extend({
   /* obvious */
   openList () {
     this.set('open', true)
+    this.bindDropdownEvents()
   },
 
   /** Handler for click outside of an element
    */
   onOutsideClick () {
-    if (this.get('open')) {
-      this.closeList()
-    }
+    this.closeList()
   },
 
   // TODO: add jsdoc
@@ -396,11 +391,8 @@ export default Ember.Component.extend({
   select (index) {
     let selected = [index]
     let values = this.getValues(selected)
-    this.setProperties({
-      selected: selected,
-      open: false
-    })
-    this.set('filter', undefined)
+    this.set('selected', selected)
+    this.closeList()
     if (this.get('on-change') && _.isFunction(this.get('on-change'))) {
       this.get('on-change')(values)
     }
@@ -428,6 +420,17 @@ export default Ember.Component.extend({
       return
     }
     this.openList()
+  },
+
+  /** obvious */
+  unbindDropdownEvents () {
+    const _handleOutsideClick = this.get('handleOutsideClick')
+    Ember.$(document).off('click', _handleOutsideClick)
+  },
+
+  /** Ember.willDestroyElement method */
+  willDestroyElement () {
+    this.unbindDropdownEvents()
   },
 
   // ==========================================================================
