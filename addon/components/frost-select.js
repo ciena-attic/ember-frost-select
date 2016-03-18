@@ -17,6 +17,21 @@ function isAttrDifferent (newAttrs, oldAttrs, attributeName) {
   return false
 }
 
+/** Hook for handling outside element click */
+function handleOutsideClick (event) {
+  const $target = Ember.$(event.target)
+  if (!$target.closest(this.$()).length) {
+    this.onOutsideClick()
+  }
+}
+
+const TAB_KEY = 9
+const ESC_KEY = 27
+const ENTER_KEY = 13
+const UP_KEY = 38
+const DOWN_KEY = 40
+const BACKSPACE_KEY = 8
+
 export default Ember.Component.extend({
 
   // ==========================================================================
@@ -206,14 +221,12 @@ export default Ember.Component.extend({
   /* Ember.didInsertElement method */
   didInsertElement () {
     this._super(...arguments)
-    const outsideClickHandler = this.get('handleOutsideClick').bind(this)
-    Ember.$(document).on('click', outsideClickHandler)
+    Ember.$(document).on('click', handleOutsideClick.bind(this))
   },
 
   /* Ember.willDestroyElement method */
   willDestroyElement () {
-    const outsideClickHandler = this.get('handleOutsideClick').bind(this)
-    Ember.$(document).on('click', outsideClickHandler)
+    Ember.$(document).off('click', handleOutsideClick.bind(this))
     this._super(...arguments)
   },
 
@@ -283,12 +296,7 @@ export default Ember.Component.extend({
     this.set('hovered', hovered)
   },
 
-  handleOutsideClick (event) {
-    const $target = Ember.$(event.target)
-    if (!$target.closest(this.$()).length) {
-      this.onOutsideClick()
-    }
-  },
+
 
   // TODO: add jsdoc
   inputElement () {
@@ -300,7 +308,7 @@ export default Ember.Component.extend({
    */
   keyDown (event) {
     // if tab is pushed - close list
-    if (event.which === 9) {
+    if (event.which === TAB_KEY) {
       if (this.get('open')) {
         this.closeList()
       }
@@ -312,7 +320,7 @@ export default Ember.Component.extend({
     switch (event.which) {
 
       // escape key or tab key, close the dropdown
-      case 27:
+      case ESC_KEY:
         event.stopPropagation()
         if (this.get('open')) {
           this.toggle(event)
@@ -320,18 +328,18 @@ export default Ember.Component.extend({
         break
 
       // enter + spacebar, choose selected
-      case 13:
+      case ENTER_KEY:
         this.chooseHovered()
         break
 
       // up arrow
-      case 38:
+      case UP_KEY:
         event.preventDefault()
         this.hoverPrev()
         break
 
       // down arrow, open the dropdown if necessary, select next
-      case 40:
+      case DOWN_KEY:
         event.preventDefault()
         if (!this.get('open')) {
           this.openList()
@@ -340,7 +348,7 @@ export default Ember.Component.extend({
         break
 
       // backspace
-      case 8:
+      case BACKSPACE_KEY:
         event.preventDefault()
         if (!this.get('open')) {
           this.openList()
