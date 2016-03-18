@@ -19,7 +19,18 @@ const testTemplate = hbs`{{frost-select
 const keyCodes = {
   'up': 38,
   'down': 40,
-  esc: 27
+  esc: 27,
+  tab: 9
+}
+
+function keyDown ($selection, keyCode) {
+  if (_.isString(keyCode)) {
+    keyCode = keyCodes[keyCode]
+  }
+  let event = $.Event('keydown')
+  event.which = keyCode
+
+  $selection.trigger(event)
 }
 
 function keyUp ($selection, keyCode) {
@@ -265,6 +276,28 @@ describeComponent(
         expect(input.val()).to.be.eql('Ghostface')
         expect(props.onChange.called).to.be.true
         done()
+      })
+    })
+
+    it('handles click outside of select', function (done) {
+      this.$('.frost-select .down-arrow').click()
+      Ember.run.later(() => {
+        this.$().click()
+        Ember.run.later(() => {
+          expect(dropDown.hasClass('open')).to.be.false
+          done()
+        })
+      })
+    })
+
+    it('handles loosing focus by pressing tab', function (done) {
+      this.$('.frost-select .down-arrow').click()
+      Ember.run.later(() => {
+        keyDown(dropDown, 'tab')
+        Ember.run.later(() => {
+          expect(dropDown.hasClass('open')).to.be.false
+          done()
+        })
       })
     })
   }
