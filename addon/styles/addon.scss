@@ -113,16 +113,6 @@ $frost-input-select-option-row-height: 35px;
       fill: $frost-select-indicator;
     }
   }
-
-  &.disabled {
-    border: 1px solid $frost-color-lgrey-1;
-    background: $frost-color-lgrey-3;
-    cursor: auto;
-
-    input.trigger {
-      color: $frost-color-grey-6;
-    }
-  }
 }
 
 .frost-select.open {
@@ -150,10 +140,10 @@ $frost-input-select-option-row-height: 35px;
     align-items: center;
     border-bottom: solid 5px $frost-color-lgrey-3;
     padding: 10px;
+    font-size: $frost-font-m;
 
     .number-selected {
       color: $frost-color-grey-5;
-      font-size: $frost-font-m;
     }
     // TODO frost-button with tertiary style
     .clear {
