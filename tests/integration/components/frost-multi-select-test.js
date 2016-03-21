@@ -154,7 +154,18 @@ describeComponent(
         wait(() => {
           let input = this.$('.frost-select .trigger')
           expect(input.val()).to.eql('Ghostface')
+          done()
+        })
+      })
+    })
 
+    it('clears selection if selectedValue is set to null', function (done) {
+      this.$('.frost-select li:first-child').click()
+      wait(() => {
+        this.set('selectedValue', null)
+        wait(() => {
+          let input = this.$('.frost-select .trigger')
+          expect(input.val()).to.eql('')
           done()
         })
       })

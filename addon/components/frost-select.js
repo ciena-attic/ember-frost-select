@@ -10,7 +10,7 @@ function isAttrDifferent (newAttrs, oldAttrs, attributeName) {
   let oldValue = _.get(oldAttrs, attributeName + '.value')
   let newValue = _.get(newAttrs, attributeName + '.value')
 
-  if (newValue && !_.isEqual(oldValue, newValue)) {
+  if (newValue !== undefined && !_.isEqual(oldValue, newValue)) {
     return true
   }
   return false
@@ -388,7 +388,7 @@ export default Ember.Component.extend({
 
   // TODO: add jsdoc
   select (index) {
-    let selected = [index]
+    let selected = index === null ? [] : [index]
     let values = this.getValues(selected)
     this.set('selected', selected)
     this.closeList()
@@ -399,6 +399,11 @@ export default Ember.Component.extend({
 
   // TODO: add jsdoc
   selectOptionByValue (selectedValue) {
+    if (selectedValue === null) {
+      this.select(null)
+      return
+    }
+
     // Find index
     let valueIndex = _.findIndex(this.get('items'), (item) => _.isEqual(item.value, selectedValue))
 
