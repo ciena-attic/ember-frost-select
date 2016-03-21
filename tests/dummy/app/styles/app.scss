@@ -1,19 +1,17 @@
 @import 'frost-core';
 @import 'frost-theme';
 
-html {
-  font-family: $frost-font-family;
-  margin: 20px;
+.dummy-body{
+  margin-left: 20px;
 }
-
 .dummy-notification-container {
-	position: fixed;
-	top: 60px;
-	right: 10px;
-	z-index: 1060;
-	width: 80%;
-	max-width: 400px;
-	margin: auto;
+  position: fixed;
+  top: 60px;
+  right: 10px;
+  z-index: 1060;
+  width: 80%;
+  max-width: 400px;
+  margin: auto;
 }
 
 .section {
