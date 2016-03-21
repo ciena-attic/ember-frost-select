@@ -1,5 +1,9 @@
 @import 'node_modules/ember-frost-theme/scss/frost-theme';
 
+// TODO: get these from theme?
+$frost-input-text-height: 35px;
+$frost-input-select-option-row-height: 35px;
+
 @mixin triangle-up($color, $size) {
   border-bottom: $size solid $color;
   border-left: $size * .8 solid transparent;
@@ -12,7 +16,7 @@
   border: solid 1px $frost-input-border;
   cursor: pointer;
   display: inline-block;
-  height: 30px;
+  height: $frost-input-text-height;
   min-width: 125px;
   outline: none;
   position: relative;
@@ -70,8 +74,8 @@
     color: $frost-input;
     cursor: pointer;
     display: inline-block;
-    height: 45px;
-    line-height: 45px;
+    height: $frost-input-select-option-row-height;
+    line-height: $frost-input-select-option-row-height;
     padding: 0 15px;
     width: 100%;
     .frost-checkbox {
@@ -101,7 +105,7 @@
     height: 20px;
     position: absolute;
     right: 10px;
-    top: 5px;
+    top: 7px;
     width: 20px;
 
     polygon {
@@ -169,3 +173,21 @@
     }
   }
 }
+
+.frost-select.disabled {
+  background-color: $frost-color-input-disabled-bg;
+  border: 1px solid $frost-color-input-disabled-border;
+  color: $frost-color-grey-6;
+  cursor: default;
+
+  input {
+    color: inherit;
+  }
+
+  .down-arrow {
+    polygon {
+      fill: $frost-color-grey-6;
+    }
+  }
+}
+

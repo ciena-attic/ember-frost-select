@@ -1,14 +1,35 @@
+import _ from 'lodash'
+import computed, {readOnly} from 'ember-computed-decorators'
+
 import FrostSelect from './frost-select'
 import layout from '../templates/components/frost-multi-select'
-import Ember from 'ember'
-import _ from 'lodash'
 
-let FrostMultiSelect = FrostSelect.extend({
+export default FrostSelect.extend({
+
+  // ==========================================================================
+  // Dependencies
+  // ==========================================================================
+
+  // ==========================================================================
+  // Properties
+  // ==========================================================================
+
   layout,
   classNames: ['frost-select', 'multi'],
-  prompt: Ember.computed('selected', function () {
-    let selected = this.get('selected')
-    let filter = this.get('filter')
+
+  // ==========================================================================
+  // Computed Properties
+  // ==========================================================================
+
+  @readOnly
+  @computed('selected')
+  /**
+   * Calculate the prompt based on what is selected
+   * @param {Number[]} selected - the currently selected indices
+   * @returns {String} the prompt to display
+   */
+  prompt (selected) {
+    const filter = this.get('filter')
     let prompt = ''
 
     if (filter !== undefined) {
@@ -20,72 +41,108 @@ let FrostMultiSelect = FrostSelect.extend({
     }
 
     return prompt
-  }),
+  },
 
+  @readOnly
+  @computed('selected')
+  /**
+   * Input should be disabled if anything is selected
+   * @param {Number[]} selected - the selected indices
+   * @param {Boolean} disabled - the selected indices
+   * @returns {Boolean} true if anything is selected
+   */
+  disableInput (selected, disabled) {
+    return disabled || (selected.length > 0)
+  },
+
+  // ==========================================================================
+  // Functions
+  // ==========================================================================
+
+  /**
+   * @returns {String[]} the labels for all selected items
+   */
   getLabels () {
     return _.map(this.get('selected'), (selectedIndex) => {
       return this.get('data')[selectedIndex].label
     })
   },
 
+  /**
+   * Select or de-select the given index
+   * @param {Number} index - the index to select
+   */
   select (index) {
-    let selected = this.get('selected')
+    const selected = this.get('selected')
+
     if (_.includes(selected, index)) {
-      selected = _.without(selected, index)
-      this.set('selected', selected)
+      const newSelected = _.without(selected, index)
+      this.set('selected', newSelected)
     } else {
       selected.push(index)
       this.notifyPropertyChange('selected')
     }
-    let values = this.getValues(selected)
+
     this.set('filter', undefined)
-    if (this.get('on-change') && _.isFunction(this.get('on-change'))) {
-      this.get('on-change')(values)
-    }
+    this.notifyOfChange(selected)
   },
 
-  disableInput: Ember.computed('selected', 'disabled', function () {
-    let selected = this.get('selected')
-    return this.get('disabled') || selected.length > 0
-  }),
-
+  /**
+   * Perform a search (if not disabled)
+   * @param {String} term - the search term
+   */
   search (term) {
     if (!this.get('disableInput')) {
       this._super(term)
     }
   },
-  selectOptionByValue (selectedValue) {
-    if (_.isUndefined(selectedValue)) {
+
+  /**
+   * Select a given option by value (rather than by index)
+   * @param {Object} value - the value to select
+   */
+  selectOptionByValue (value) {
+    if (_.isUndefined(value)) {
       return
     }
 
-    let items = this.get('items')
+    if (!_.isArray(value)) {
+      value = [value]
+    }
 
-    if (!_.isArray(selectedValue)) {
-      selectedValue = [selectedValue]
-    }
-    let selected = selectedValue.map(function (value) {
-      return _.findIndex(items, (item) => _.isEqual(item.value, value))
-    }).filter(function (value) {
-      return value >= 0
-    })
+    const items = this.get('items')
+    const selected = value
+      .map((value) => {
+        return _.findIndex(items, (item) => _.isEqual(item.value, value))
+      })
+      .filter((val) => (val >= 0))
+
     this.set('selected', selected)
-    let values = this.getValues(selected)
     this.set('filter', undefined)
-    if (this.get('on-change') && _.isFunction(this.get('on-change'))) {
-      this.get('on-change')(values)
-    }
+    this.notifyOfChange(selected)
   },
+
+  // ==========================================================================
+  // Events
+  // ==========================================================================
+
+  // ==========================================================================
+  // Actions
+  // ==========================================================================
+
   actions: {
+    // TODO: Add jsdoc
     onCheck (data) {
       // stub for checkbox action
     },
 
+    /**
+     * Clear the selected property and notify parent of change
+     */
     clearSelection () {
-      this.set('selected', [])
-      this.get('on-change')([])
+      const newSelection = []
+      this.set('selected', newSelection)
+      this.notifyOfChange(newSelection)
     }
   }
 })
-
-export default FrostMultiSelect

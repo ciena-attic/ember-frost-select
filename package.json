@@ -1,6 +1,6 @@
 {
   "name": "ember-frost-select",
-  "version": "1.4.0",
+  "version": "1.6.2",
   "description": "The default blueprint for ember-cli addons.",
   "frostGuideDirectory": "ui-components/input-controls/select",
   "directories": {
@@ -17,10 +17,11 @@
   "engines": {
     "node": ">= 5.0.0"
   },
-  "author": "Chris Stoll (https://github.com/cstolli",
+  "author": "Chris Stoll (https://github.com/cstolli)",
   "contributors": [
     "Matthew Dahl (https://github.com/sandersky)",
-    "Roxanne Panthaky (https://github.com/rox163)"
+    "Roxanne Panthaky (https://github.com/rox164)",
+    "Adam Meadows (https://github.com/job13er)"
   ],
   "license": "MIT",
   "devDependencies": {
@@ -38,7 +39,7 @@
     "ember-cli-notifications": "^3.2.0",
     "ember-cli-sass": "5.3.0",
     "ember-cli-uglify": "^1.2.0",
-    "ember-computed-decorators": "^0.2.2",
+    "ember-computed-decorators": "0.2.2",
     "ember-data": "^2.4.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
@@ -54,7 +55,8 @@
     "ember-try": "^0.2.0",
     "eslint": "2.2.0",
     "eslint-config-frost-standard": "^1.0.0",
-    "loader.js": "^4.0.1"
+    "loader.js": "^4.0.1",
+    "markdown-code-highlighting": "0.0.6"
   },
   "keywords": [
     "ember-addon",
