@@ -36,8 +36,9 @@ $frost-input-select-option-row-height: 35px;
 
   .drop-down-container {
     background: $frost-select-container-background;
+    border: 1px solid $frost-color-lgrey-3;
     border-radius: 3px;
-    box-shadow: 0 2px 7px 3px transparentize($frost-select-container-shadow, .5);
+    box-shadow: 0 2px 7px 3px transparentize($frost-select-container-shadow, .4);
     left: -1px;
     margin-bottom: 1em;
     opacity: 0;
@@ -70,8 +71,8 @@ $frost-input-select-option-row-height: 35px;
   }
 
   li {
-    border-bottom: solid 1px $frost-color-lgrey-2;
-    color: $frost-input;
+    border-bottom: solid 1px $frost-color-lgrey-3;
+    color: $frost-color-grey-5;
     cursor: pointer;
     display: inline-block;
     height: $frost-input-select-option-row-height;
@@ -98,7 +99,7 @@ $frost-input-select-option-row-height: 35px;
   }
 
   .selected {
-    font-weight: bold;
+    color: $frost-color-grey-2;
   }
 
   .down-arrow {
@@ -142,9 +143,18 @@ $frost-input-select-option-row-height: 35px;
   }
 
   .multi-status {
-    border-bottom: solid 5px $frost-color-lgrey-2;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid 5px $frost-color-lgrey-3;
     padding: 10px;
 
+    .number-selected {
+      color: $frost-color-grey-5;
+      font-size: $frost-font-m;
+    }
     // TODO frost-button with tertiary style
     .clear {
       color: $frost-button-tertiary;
