@@ -470,12 +470,6 @@ export default Ember.Component.extend({
       return false
     },
 
-<<<<<<< HEAD
-    onClickArrow (event) {
-      if (!this.get('disabled')) {
-        this.toggle(event)
-      }
-=======
     // TODO: add jsdoc
     onItemOver (event) {
       event.stopImmediatePropagation()
@@ -483,7 +477,6 @@ export default Ember.Component.extend({
       let index = parseInt(target.getAttribute('data-index'), 10)
       this.set('hovered', index)
       return false
->>>>>>> upstream/master
     },
 
     // TODO: add jsdoc
