@@ -1,7 +1,6 @@
 import _ from 'lodash'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
-
 import layout from '../templates/components/frost-select'
 
 // TODO: Add typedefs for items

@@ -37,6 +37,7 @@
     "ember-cli-mirage": "^0.1.11",
     "ember-cli-mocha": "0.10.1",
     "ember-cli-notifications": "^3.2.0",
+    "ember-cli-sass": "5.3.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-computed-decorators": "0.2.2",
     "ember-data": "^2.4.0",
