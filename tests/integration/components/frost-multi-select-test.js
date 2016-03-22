@@ -170,6 +170,16 @@ describeComponent(
         })
       })
     })
+
+    it('keeps the list open when a value is selected', function (done) {
+      this.$('.down-arrow').click()
+      this.$('.frost-select li:first-child').click()
+      wait(() => {
+        const isOpen = this.$('.frost-select').hasClass('open')
+        expect(isOpen).to.be.true
+        done()
+      })
+    })
   }
 )
 
