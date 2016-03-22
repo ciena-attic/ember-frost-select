@@ -20,7 +20,7 @@
   </div>
 
   <div class="example">
-    <div class="title">Pre-selected value</div>
+    <div class="title">Pre-selected index</div>
     <div class="snippet">
       {{format-markdown "```handlebars
 {{frost-select
@@ -36,6 +36,27 @@
         data=data
         on-change=(action 'onChange')
         selected=selectedIndex
+      }}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Pre-selected value</div>
+    <div class="snippet">
+      {{format-markdown "```handlebars
+{{frost-select
+  data=data
+  on-change=(action 'onChange')
+  selectedValue=preSelectedValue
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-select
+        data=data
+        on-change=(action 'onChange')
+        selectedValue=preSelectedValue
       }}
     </div>
   </div>
@@ -129,7 +150,7 @@
   </div>
 
   <div class="example">
-    <div class="title">Multiple pre-selected values</div>
+    <div class="title">Multiple pre-selected indices</div>
     <div class="snippet">
       {{format-markdown "```handlebars
 {{frost-multi-select
@@ -145,6 +166,27 @@
         data=data
         on-change=(action 'onChange')
         selected=selectedIndices
+      }}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Multiple pre-selected values</div>
+    <div class="snippet">
+      {{format-markdown "```handlebars
+{{frost-multi-select
+  data=data
+  on-change=(action 'onChange')
+  selectedValue=selectedValues
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-multi-select
+        data=data
+        on-change=(action 'onChange')
+        selectedValue=selectedValues
       }}
     </div>
   </div>
