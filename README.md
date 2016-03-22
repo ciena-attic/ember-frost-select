@@ -103,7 +103,7 @@ var selectedValue = ["bar", "buzz"]
 
 will select both values `"bar"` and `"buzz"`.
 
-NOTE: Changing `selectedValue` will overwrite any previous selections. However, changing `selectedValue` to be undefined, or a value that can be evaluated to be equal to the previous value (using lodash's `isEqual` function) will not cause values to be overwritten.
+NOTE: Changing `selectedValue` will overwrite any previous selections. However, changing `selectedValue` to be undefined, or a value that can be evaluated to be equal to the previous value (using lodash's `isEqual` function) will not cause values to be overwritten. Setting `selectedValue` to `null` will clear the selection.
 
 ##Contributing
 This following outlines the details of collaborating on this Ember addon:
