@@ -391,7 +391,11 @@ export default Ember.Component.extend({
     let selected = index === null ? [] : [index]
     let values = this.getValues(selected)
     this.set('selected', selected)
-    this.closeList()
+
+    if (this.get('open')) {
+      this.closeList()
+    }
+
     if (this.get('on-change') && _.isFunction(this.get('on-change'))) {
       this.get('on-change')(values)
     }

@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
     let result = this.model.map((record) => {
       return {
         label: record.get('label'),
-        value: record.id
+        value: record.get('value')
       }
     })
     if (this.get('search')) {
@@ -20,6 +20,8 @@ export default Ember.Controller.extend({
 
   selectedIndex: 1,
   selectedIndices: [1, 2],
+  preSelectedValue: 'Arthur Curry',
+  selectedValues: ['Arthur Curry', 'Adam Meadows'],
 
   actions: {
     onChange (values) {
