@@ -22,7 +22,7 @@ export default FrostSelect.extend({
   // ==========================================================================
 
   @readOnly
-  @computed('selected')
+  @computed('selectedIndices')
   /**
    * Calculate the prompt based on what is selected
    * @param {Number[]} selected - the currently selected indices
@@ -44,7 +44,7 @@ export default FrostSelect.extend({
   },
 
   @readOnly
-  @computed('selected')
+  @computed('selectedIndices')
   /**
    * Input should be disabled if anything is selected
    * @param {Number[]} selected - the selected indices
@@ -63,7 +63,7 @@ export default FrostSelect.extend({
    * @returns {String[]} the labels for all selected items
    */
   getLabels () {
-    return _.map(this.get('selected'), (selectedIndex) => {
+    return _.map(this.get('selectedIndices'), (selectedIndex) => {
       return this.get('data')[selectedIndex].label
     })
   },
@@ -73,14 +73,14 @@ export default FrostSelect.extend({
    * @param {Number} index - the index to select
    */
   select (index) {
-    const selected = this.get('selected')
+    const selected = this.get('selectedIndices')
 
     if (_.includes(selected, index)) {
       const newSelected = _.without(selected, index)
-      this.set('selected', newSelected)
+      this.set('selectedIndices', newSelected)
     } else {
       selected.push(index)
-      this.notifyPropertyChange('selected')
+      this.notifyPropertyChange('selectedIndices')
     }
 
     this.set('filter', undefined)
@@ -117,7 +117,7 @@ export default FrostSelect.extend({
       })
       .filter((val) => (val >= 0))
 
-    this.set('selected', selected)
+    this.set('selectedIndices', selected)
     this.set('filter', undefined)
     this.notifyOfChange(selected)
   },
@@ -141,7 +141,7 @@ export default FrostSelect.extend({
      */
     clearSelection () {
       const newSelection = []
-      this.set('selected', newSelection)
+      this.set('selectedIndices', newSelection)
       this.notifyOfChange(newSelection)
     }
   }
