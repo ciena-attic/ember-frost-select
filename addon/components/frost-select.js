@@ -60,7 +60,7 @@ export default Ember.Component.extend({
   // ==========================================================================
 
   @readOnly
-  @computed('items', 'selected', 'hovered', 'filter')
+  @computed('items', 'selectedIndices', 'hovered', 'filter')
   /**
    * Get the display items
    * @param {Object[]} items - the possible items
@@ -135,7 +135,7 @@ export default Ember.Component.extend({
   },
 
   @readOnly
-  @computed('selected')
+  @computed('selectedIndices')
   /**
    * Build the prompt based on the selected item(s)
    * @param {Number[]} selected - the selected indices
@@ -202,7 +202,7 @@ export default Ember.Component.extend({
     this._super(...arguments)
 
     if (this.get('selected') === undefined) {
-      this.set('selected', [])
+      this.set('selectedIndices', [])
     }
   },
 
@@ -222,7 +222,7 @@ export default Ember.Component.extend({
       let selected = this.get('selected')
 
       selected = selected && (_.isArray(selected) || _.isNumber(selected)) ? [].concat(selected) : []
-      this.set('selected', selected)
+      this.set('selectedIndices', selected)
     }
   },
 
@@ -265,7 +265,7 @@ export default Ember.Component.extend({
   },
 
   // TODO: add jsdoc
-  getValues (selected = this.get('selected')) {
+  getValues (selected = this.get('selectedIndices')) {
     return selected.map((selectedIndex) => {
       return this.get('data')[selectedIndex].value
     })
@@ -390,7 +390,7 @@ export default Ember.Component.extend({
   select (index) {
     let selected = index === null ? [] : [index]
     let values = this.getValues(selected)
-    this.set('selected', selected)
+    this.set('selectedIndices', selected)
 
     if (this.get('open')) {
       this.closeList()
